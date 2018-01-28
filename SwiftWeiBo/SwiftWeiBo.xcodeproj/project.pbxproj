@@ -22,6 +22,7 @@
 		18FF772F201CD1BD00055AA8 /* Message.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18FF772E201CD1BD00055AA8 /* Message.storyboard */; };
 		18FF7731201CD1CF00055AA8 /* Discover.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18FF7730201CD1CF00055AA8 /* Discover.storyboard */; };
 		18FF7733201CD1DC00055AA8 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18FF7732201CD1DC00055AA8 /* Profile.storyboard */; };
+		18FF7736201D610300055AA8 /* UIButton-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FF7735201D610300055AA8 /* UIButton-Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		18FF772E201CD1BD00055AA8 /* Message.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Message.storyboard; path = ../../Message.storyboard; sourceTree = "<group>"; };
 		18FF7730201CD1CF00055AA8 /* Discover.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Discover.storyboard; path = ../../Discover.storyboard; sourceTree = "<group>"; };
 		18FF7732201CD1DC00055AA8 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Profile.storyboard; path = ../../Profile.storyboard; sourceTree = "<group>"; };
+		18FF7735201D610300055AA8 /* UIButton-Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton-Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +150,7 @@
 				18FF771B201B664C00055AA8 /* Message */,
 				18FF7718201B664C00055AA8 /* Discover */,
 				18FF771C201B664C00055AA8 /* Profile */,
+				18FF7734201D60DC00055AA8 /* Tools */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -195,6 +198,14 @@
 				18FF7725201B689200055AA8 /* ProfileViewController.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		18FF7734201D60DC00055AA8 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				18FF7735201D610300055AA8 /* UIButton-Extension.swift */,
+			);
+			path = Tools;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -337,6 +348,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18FF771E201B681800055AA8 /* MainViewController.swift in Sources */,
+				18FF7736201D610300055AA8 /* UIButton-Extension.swift in Sources */,
 				18FF7724201B688500055AA8 /* DiscoverViewController.swift in Sources */,
 				18FF7726201B689200055AA8 /* ProfileViewController.swift in Sources */,
 				18E113E6201AB9FA00D4FC3F /* AppDelegate.swift in Sources */,

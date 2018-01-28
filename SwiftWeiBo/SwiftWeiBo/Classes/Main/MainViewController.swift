@@ -11,7 +11,9 @@ import UIKit
 // storyboard方式初始化主界面
 class MainViewController: UITabBarController {
     
-    fileprivate lazy var composeBtn : UIButton = UIButton()
+//    fileprivate lazy var composeBtn : UIButton = UIButton()
+//    fileprivate lazy var composeBtn : UIButton = UIButton.createBtn(imageName: "tabbar_compose_icon_add", bgImageName: "tabbar_compose_button")
+    fileprivate lazy var composeBtn : UIButton = UIButton(imageName: "tabbar_compose_icon_add", bgImageName: "tabbar_compose_button")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +25,7 @@ class MainViewController: UITabBarController {
 extension MainViewController {
     fileprivate func setupComposeBtn() {
         tabBar.addSubview(composeBtn)
-        
+        /*
         // 设置属性
         composeBtn.setBackgroundImage(UIImage(named: "tabbar_compose_button"), for: .normal)
         composeBtn.setBackgroundImage(UIImage(named: "tabbar_compose_button_highlighted"), for: .highlighted)
@@ -33,10 +35,37 @@ extension MainViewController {
         // 设置位置尺寸
         // 设置好图片后，可以使用这个方法让按钮尺寸进行自适应
         composeBtn.sizeToFit()
+        */
         
         // swift中结构体的创建，使用init构造函数
         //        composeBtn.center = CGPointMake(tabBar.center.x, tabBar.bounds.size.height*0.5)
         composeBtn.center = CGPoint(x: tabBar.center.x, y: tabBar.bounds.size.height*0.5)
+        
+        
+        // SEL封装：#selector(composeBtnClicked)
+        // SEL带参数封装: #selector(composeBtnClicked(sender:))
+//        composeBtn.addTarget(self, action: #selector(composeBtnClicked(sender:)), for: .touchUpInside)
+        // http://swift.gg/2016/07/27/swift3-changes/
+//        composeBtn.addTarget(self, action: #selector(MainViewController.composeBtnClicked), for: .touchUpInside)
+        composeBtn.addTarget(self, action: #selector(MainViewController.composeBtnClicked(sender:)), for: .touchUpInside)
+        
+    }
+}
+
+
+//MARK:- 事件处理
+extension MainViewController {
+    // #selector() 系统会提示 @objc
+    // 事件监听本质发送消息.但是发送消息是OC的特性
+    // 将方法包装成@SEL --> 类中查找方法列表 --> 根据@SEL找到imp指针(函数指针) --> 执行函数
+    // 如果swift中将一个函数声明称private/fileprivate,那么该函数不会被添加到方法列表中
+    // 如果在private前面加上@objc,那么该方法依然会被添加到方法列表中
+    func composeBtnClicked() {
+        print("---composeBtnClicked---")
+    }
+    
+    @objc fileprivate func composeBtnClicked(sender: UIButton) {
+        print("---composeBtnClicked--\(sender)-")
     }
 }
 
