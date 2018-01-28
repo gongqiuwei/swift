@@ -199,36 +199,36 @@ xcode版本：xcode8.2.1 swift版本：swift3.0
         	
         	// 5.遍历，添加子控制器
         	for dict in dictArr {
-        		// 注意，需要使用continue 
-	            guard let childVcName = dict["vcName"] else {
-	                continue
-	            }
-            
-	            guard let title = dict["title"] else {
-	                continue
-	            }
-            
-	            guard let imageName = dict["imageName"] else {
-	                continue
-	            }
-            	
-            	addChildViewController(childVcName: childVcName, title: title, imageName: imageName)
+        	// 注意，需要使用continue 
+		        guard let childVcName = dict["vcName"] else {
+		            continue
+		        }
+	    
+		        guard let title = dict["title"] else {
+		            continue
+		        }
+	    
+		        guard let imageName = dict["imageName"] else {
+		            continue
+		        }
+	    	
+		    	addChildViewController(childVcName: childVcName, title: title, imageName: imageName)
         	}
 		}
 		
-			/// 通过类名添加子控制器
-    		private func addChildViewController(childVcName: String, title: String, imageName: String) {
-    			// viewController(forName: childVcName)，上面使用类名创建控制器
-        		guard let childVc = viewController(forName: childVcName) else {
-            		return;
-        		}
-        		childVc.tabBarItem.title = title
-        		childVc.tabBarItem.image = UIImage(named: imageName)
-        		childVc.tabBarItem.selectedImage = UIImage(named: imageName + "_highlighted")
-        
-        		let nav = UINavigationController(rootViewController: childVc)
-        		addChildViewController(nav)
+		/// 通过类名添加子控制器
+		private func addChildViewController(childVcName: String, title: String, imageName: String) {
+			// viewController(forName: childVcName)，上面使用类名创建控制器
+    		guard let childVc = viewController(forName: childVcName) else {
+        		return;
     		}
+    		childVc.tabBarItem.title = title
+    		childVc.tabBarItem.image = UIImage(named: imageName)
+    		childVc.tabBarItem.selectedImage = UIImage(named: imageName + "_highlighted")
+    
+    		let nav = UINavigationController(rootViewController: childVc)
+    		addChildViewController(nav)
+		}
 		```
 		
 		- 注意点
@@ -260,4 +260,41 @@ xcode版本：xcode8.2.1 swift版本：swift3.0
 					let anyObject = try! NSJSONSerialization.JSONObjectWithData(jsonData, options: .MutableContainers)
 					```
 					
-	- 
+	- 使用Main.Storyboard初始化主界面
+	
+		- 使用storyboard reference划分模块
+		
+		![](Images/Snip20180128_3.png)
+		
+		- TabbarItem的设定
+		
+		![](Images/Snip20180128_5.png)
+		
+		- Tabbar中间加号按钮的设定
+		
+		1. 使用一个空白的控制器在tabbar中占一个位置，并设置item的enable属性为false
+		![](Images/Snip20180128_7.png)
+		
+		2. 使用代码添加加号按钮
+		
+		MainViewController.swift中
+		
+		```swift
+		fileprivate func setupComposeBtn() {
+        	tabBar.addSubview(composeBtn)
+        
+        	// 设置属性
+        	composeBtn.setBackgroundImage(UIImage(named: "tabbar_compose_button"), for: .normal)
+        	composeBtn.setBackgroundImage(UIImage(named: "tabbar_compose_button_highlighted"), for: .highlighted)
+        	composeBtn.setImage(UIImage(named: "tabbar_compose_icon_add"), for: .normal)
+       	composeBtn.setImage(UIImage(named: "tabbar_compose_icon_add_highlighted"), for: .highlighted)
+        
+        	// 设置位置尺寸
+        	// 设置好图片后，可以使用这个方法让按钮尺寸进行自适应
+        	composeBtn.sizeToFit()
+        
+        	// swift中结构体的创建，使用init构造函数
+        	// composeBtn.center = CGPointMake(tabBar.center.x, tabBar.bounds.size.height*0.5)
+        	composeBtn.center = CGPoint(x: tabBar.center.x, y: tabBar.bounds.size.height*0.5)
+    	}
+		```

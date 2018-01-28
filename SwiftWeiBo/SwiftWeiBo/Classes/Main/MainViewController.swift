@@ -4,16 +4,52 @@
 //
 //  Created by apple on 2018/1/26.
 //  Copyright © 2018年 gongqiuwei. All rights reserved.
-//  通过纯代码的方式创建控制器
+//
 
 import UIKit
 
+// storyboard方式初始化主界面
+class MainViewController: UITabBarController {
+    
+    fileprivate lazy var composeBtn : UIButton = UIButton()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setupComposeBtn()
+    }
+}
+
+extension MainViewController {
+    fileprivate func setupComposeBtn() {
+        tabBar.addSubview(composeBtn)
+        
+        // 设置属性
+        composeBtn.setBackgroundImage(UIImage(named: "tabbar_compose_button"), for: .normal)
+        composeBtn.setBackgroundImage(UIImage(named: "tabbar_compose_button_highlighted"), for: .highlighted)
+        composeBtn.setImage(UIImage(named: "tabbar_compose_icon_add"), for: .normal)
+        composeBtn.setImage(UIImage(named: "tabbar_compose_icon_add_highlighted"), for: .highlighted)
+        
+        // 设置位置尺寸
+        // 设置好图片后，可以使用这个方法让按钮尺寸进行自适应
+        composeBtn.sizeToFit()
+        
+        // swift中结构体的创建，使用init构造函数
+        //        composeBtn.center = CGPointMake(tabBar.center.x, tabBar.bounds.size.height*0.5)
+        composeBtn.center = CGPoint(x: tabBar.center.x, y: tabBar.bounds.size.height*0.5)
+    }
+}
+
+/* 
+// 通过纯代码的方式创建控制器
 class MainViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        addChildViewControllerFromJsonFile()
+        
+        
+//        addChildViewControllerFromJsonFile()
         
         // 全局设置tabbar的tincolor（tincolor影响选中图片和选中文字颜色）
 //        UITabBar.appearance().tintColor = UIColor.orange
@@ -165,4 +201,4 @@ extension MainViewController {
 //        main.addChildViewController(UIViewController())
 //    }
 //}
-
+*/

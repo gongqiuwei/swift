@@ -19,9 +19,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 全局设置tabbar的tincolor（tincolor影响选中图片和选中文字颜色）
         UITabBar.appearance().tintColor = UIColor.orange
         
+        /*
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = MainViewController()
         window?.makeKeyAndVisible()
+         */
         return true
     }
 
