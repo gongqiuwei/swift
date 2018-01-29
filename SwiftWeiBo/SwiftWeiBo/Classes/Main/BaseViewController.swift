@@ -11,7 +11,7 @@ import UIKit
 class BaseViewController: UITableViewController {
     
     /// 是否登录
-    var isLogin : Bool = false
+    var isLogin : Bool = true
     
     lazy var visitorView : VisitorView = VisitorView.visitorView()
 
@@ -27,6 +27,9 @@ extension BaseViewController {
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "注册", style: .plain, target: self, action: #selector(BaseViewController.registerBtnClicked))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "登录", style: .plain, target: self, action: #selector(BaseViewController.loginBtnClicked))
+        
+        visitorView.registBtn.addTarget(self, action: #selector(BaseViewController.registerBtnClicked), for: .touchUpInside)
+        visitorView.loginBtn.addTarget(self, action: #selector(BaseViewController.loginBtnClicked), for: .touchUpInside)
     }
 }
 

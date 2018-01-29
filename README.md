@@ -402,6 +402,81 @@ xcode版本：xcode8.2.1 swift版本：swift3.0
 				- 警告原因：git 管理了工程文件，但是在删除过程中处理不当，没有通过git进行文件删除导致
 				- 处理参考：<http://blog.csdn.net/gdutxzy/article/details/41476965>
 
-- 需求一： 未登录情况下的访客视图
+- 项目通用需求一： 未登录情况下的访客视图
 
 	- 需求： 
+	
+		<figure class="half">
+	    	<img src="Images/Snip20180129_10.png" width="300"/>
+	    	<span></span>
+	    	<img src="Images/Snip20180129_11.png" width="300"/>
+		</figure>
+	
+	- 思路：
+		
+		- 4个页面都有访客视图，因此采用继承方式，都继承自baseViewController，由baseViewController判断是否登录然后在`loadView`方法中加载不同的视图
+		- 访客视图单独写一个类 `VisitorView` 进行管理
+			* 提供类方法，快速从xib中加载视图
+			* 设置不同的界面
+			* 旋转动画 （CABasicAnimation）
+		- 利用xib文件描述 `VisitorView`
+	
+
+- Home页面需求
+
+	- navigationBar设定
+		- leftItem、rightItem设定
+			- 抽取UIBarButtonItem的Extension类，实现代码的可复用
+			
+			```swift
+			extension UIBarButtonItem {
+				/// 使用imagename直接生成UIBarButtonItem
+				convenience init(imageName: String) {
+					let btn = UIButton()
+					btn.setImage(UIImage(named:imageName), for: .normal)
+					btn.setImage(UIImage(named:imageName + "_highlighted"), for: .highlighted)
+					btn.sizeToFit()
+					
+					// 便利构造函数，需要显示调用其他已经存在的init构造函数
+					self.init(customView: btn)
+				}
+			}
+			
+			// 使用
+			navigationItem.leftBarButtonItem = UIBarButtonItem(imageName: "navigationbar_friendattention")
+			```
+			
+		- titleView设定
+			- 普通按钮的图片在左，文字在右，现在需要的按钮是文字在左图片在右，因此需要自定义按钮
+			
+			```swift
+			class TitleButton: UIButton {
+				// 不能重写init方法，UI控件一般重写init(frame:)方法
+				// UI控件的init方法内部会调用init(frame:)
+				override init(frame: CGRect) {
+					// 先使用super 生成对象，在对对象的属性进行设定，要在显示调用
+					super.init(frame: frame)
+					
+					setImage(UIImage(named:"navigationbar_arrow_down"), for: .normal)
+					setImage(UIImage(named:"navigationbar_arrow_up"), for: .selected)
+					setTitleColor(UIColor.black, for: .normal)
+					sizeToFit()
+					// 去除高亮状态图片变暗
+					adjustsImageWhenHighlighted = false
+				}
+				
+				// swift中规定:重写控件的init(frame方法)或者init()方法,必须重写init?(coder aDecoder: NSCoder)，系统会生成默认的实现
+				required init?(coder aDecoder: NSCoder) {
+					fatalError("init(coder:) has not been implemented")
+				}
+				
+				// 重新布局内部的子控件
+				override func layoutSubviews() {
+					// 必须先调用
+					super.layoutSubviews()
+					
+					titleLabel!.frame.origin.x = 0
+					imageView!.frame.origin.x = titleLabel!.frame.size.width + 5
+				}
+			}
+			```

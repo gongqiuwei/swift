@@ -19,9 +19,13 @@ class VisitorView: UIView {
     }
     
     
-    @IBOutlet weak var rotationView: UIImageView!
-    @IBOutlet weak var iconView: UIImageView!
-    @IBOutlet weak var tipLabel: UILabel!
+    @IBOutlet weak private var rotationView: UIImageView!
+    @IBOutlet weak private var iconView: UIImageView!
+    @IBOutlet weak private var tipLabel: UILabel!
+    
+    // button的监听事件需要在viewcontroller中添加，因此这里不拖action，而是outlet
+    @IBOutlet weak var registBtn: UIButton!
+    @IBOutlet weak var loginBtn: UIButton!
     
     /// 设置visitorview信息
     func setupVisitorViewInfo(title:String, iconName:String) {
