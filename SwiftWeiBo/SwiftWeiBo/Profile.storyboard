@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Root View Controller-->
+        <!--我-->
         <scene sceneID="6mq-mo-6kA">
             <objects>
-                <tableViewController id="eFM-d4-RAY" sceneMemberID="viewController">
+                <tableViewController id="eFM-d4-RAY" customClass="ProfileViewController" customModule="SwiftWeiBo" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Vbx-xX-Ajl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -21,7 +21,7 @@
                             <outlet property="delegate" destination="eFM-d4-RAY" id="qRS-nU-pzC"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="e37-Mq-bCv"/>
+                    <navigationItem key="navigationItem" title="我" id="e37-Mq-bCv"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mQO-VM-fch" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

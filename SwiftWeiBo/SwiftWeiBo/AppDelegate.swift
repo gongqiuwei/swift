@@ -16,8 +16,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        // 全局设置tabbar的tincolor（tincolor影响选中图片和选中文字颜色）
+        // 全局设置tabbar的tintcolor（tintcolor影响选中图片和选中文字颜色）
         UITabBar.appearance().tintColor = UIColor.orange
+        // 全局设置navgationbar的tintcolor
+        UINavigationBar.appearance().tintColor = UIColor.orange
         
         /*
         window = UIWindow(frame: UIScreen.main.bounds)

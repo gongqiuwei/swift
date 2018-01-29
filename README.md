@@ -350,7 +350,7 @@ xcode版本：xcode8.2.1 swift版本：swift3.0
 			
 				 - 小结：
 				
-					swift中，创建对象，推荐使用构造函数，而不是像OC中使用类方法
+					swift中，快速创建对象，推荐使用构造函数，而不是像OC中使用类方法
 					
 					例如：
 						UIImage
@@ -401,3 +401,7 @@ xcode版本：xcode8.2.1 swift版本：swift3.0
 			
 				- 警告原因：git 管理了工程文件，但是在删除过程中处理不当，没有通过git进行文件删除导致
 				- 处理参考：<http://blog.csdn.net/gdutxzy/article/details/41476965>
+
+- 需求一： 未登录情况下的访客视图
+
+	- 需求： 

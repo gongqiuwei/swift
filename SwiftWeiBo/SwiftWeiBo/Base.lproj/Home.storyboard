@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Root View Controller-->
+        <!--首页-->
         <scene sceneID="auc-oC-Ey7">
             <objects>
-                <tableViewController id="y3u-qe-WWx" sceneMemberID="viewController">
+                <tableViewController id="y3u-qe-WWx" customClass="HomeViewController" customModule="SwiftWeiBo" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Ejf-Hd-hEK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -21,7 +21,7 @@
                             <outlet property="delegate" destination="y3u-qe-WWx" id="E5o-ca-sCh"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="zlW-bJ-aGy"/>
+                    <navigationItem key="navigationItem" title="首页" id="zlW-bJ-aGy"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rSS-zz-XHv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

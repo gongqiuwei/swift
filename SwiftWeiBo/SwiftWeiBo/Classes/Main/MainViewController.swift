@@ -95,7 +95,7 @@ class MainViewController: UITabBarController {
         // 1.获取json文件路径
         guard let filePath = Bundle.main.path(forResource: "MainVCSettings.json", ofType: nil) else {
             print("filepath failure")
-            return;
+            return;>
         }
         
         guard let jsonData = NSData(contentsOfFile: filePath) as? Data else {
