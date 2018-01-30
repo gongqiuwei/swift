@@ -482,5 +482,161 @@ xcode版本：xcode8.2.1 swift版本：swift3.0
 			```
 			
 	- 仿照iPad的popover效果
+		
 		- 页面布局（图片的保护拉伸）
+		<figure class="half">
+	    	<img src="Images/Snip20180130_14.png" width="300"/>
+	    	<img src="Images/Snip20180130_15.png" width="300"/>
+		</figure>
+		
+			- 代码： 利用UIImage类 `resizableImageWithCapInsets:resizingMode` & `resizableImageWithCapInsets:`
+			- xcode的assets自带slicing功能
+				- 图文设置(参考:<http://blog.csdn.net/minjing_lin/article/details/51029296>)
+					![](Images/Snip20180130_16.png)
+				- 数字属性设置
+					![](Images/Snip20180130_17.png)
+			
 		- 自定义modal转场
+			
+			1. 使用modal自定义转场
+
+				```swfit
+				// 需要present出的vc
+				let popover = PopoverViewController()
+				
+				// custom：表示当popvc被present出来之后，原来的homevc控制器是需要保留的
+				// 默认是不需要保留，由于当前需求是能看到后面的视图，因此这个需要设定
+				popover.modalPresentationStyle = .custom
+				
+				// present的转场代理，设置后系统根据它进行转场
+				popover.transitioningDelegate = popoverAnimator
+				
+				present(popover, animated: true, completion: nil)
+				```
+			2. 设置自定义转场代理对象（transitioningDelegate对象）
+				
+				```swift
+				// 返回的对象继承自UIPresentationController
+				// UIPresentationController主要用来控制转场的时候的视图层级
+				// containerView，presentedView，presentingView等等后面详细介绍
+				func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+					
+					// 返回自定义的UIPresentationController子类对象
+					return PopoverPresentationController(presentedViewController: presented, presenting: presenting)
+				}
+				
+				// 返回值是一个遵守UIViewControllerAnimatedTransitioning协议的NSObject对象
+				// 该对象根据协议去描述present弹出时候的动画控制，后面介绍使用
+				func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+					return self
+				}
+				
+				// 返回值同上
+				// 主要描述dismiss动画
+				func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+					return self
+				}
+				```
+			
+			3. UIPresentationController视图层级管理
+				 
+				 * 普通present时候的视图层级 
+					![](Images/Snip20180129_13.png)
+					
+				 * 层级结构：
+				 	- UITransitionView：系统添加的用来做Present转场的view，要present出来的vc的view会被添加到这里面去
+				 	- UIView：被present出来的vc的view
+				 	- UIImageView，UITableView：vc内部的子控件
+				 * 在UIPresentationController类中，我们可以拿到UITransitionView（containerView属性）和 UIView（presentedView属性），然后可以控制uiview的farme等等属性，具体如下
+				 
+				 ```swift
+				 class PopoverPresentationController: UIPresentationController {
+				 	private lazy var coverView : UIView = UIView()
+				 
+				 	/// containerView开始布局
+				 	override func containerViewWillLayoutSubviews() {
+				 		super.containerViewWillLayoutSubviews()
+				 	
+				 		// 设置present出来的view的属性
+				 		presentedView?.frame = CGRect(x: 100, y: 55, width: 180, height: 250);
+				 		presentedView?.backgroundColor = UIColor.clear
+				 	
+				 		// 加一层蒙版, 不建议直接去设置containerView，有可能系统会做其他的事
+				 		setupCoverView()
+				 	}
+				 
+				 	/// 设置蒙版
+				 	private func setupCoverView() {
+				 		containerView?.insertSubview(coverView, at: 0)
+				 		coverView.backgroundColor = UIColor(white: 0.8, alpha: 0.2)
+				 		// ?? 空合运算符 表示的意思：a != nil ? a! : b
+				 		coverView.frame = (containerView?.bounds) ?? CGRect.zero
+				 	
+				 		// 添加手势事件
+				 		let tapGes = UITapGestureRecognizer(target: self, action: #selector(PopoverPresentationController.coverViewClicked))
+				 		coverView.addGestureRecognizer(tapGes)
+					 }
+					
+					/// 点击事件监听
+					@objc private func coverViewClicked() {
+						presentedViewController.dismiss(animated: true, completion: nil)
+					}
+				}
+				 ```
+			
+			4. UIViewControllerAnimatedTransitioning动画控制
+				
+				```swift
+				//MARK:- present&dismiss动画控制
+				extension PopoverAnimator : UIViewControllerAnimatedTransitioning {
+					// 动画时长，协议中必须实现方法
+					func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+						return 0.5
+					}
+					
+					// present&dismiss转场动画的代码，在这里写动画代码
+					func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+						// present动画和dismiss动画都会在这里，因此需要判断
+						isPresented ? animateTransitionForPresent(using: transitionContext) : animateTransitionForDismiss(using: transitionContext)
+					}
+					
+					// presented动画
+					private func animateTransitionForPresent(using transitionContext: UIViewControllerContextTransitioning) {
+						// 0. 获取要弹出的view
+						let presentedView = transitionContext.view(forKey: UITransitionContextViewKey.to)
+						
+						// 1. 手动将view添加到contanerView中，自定义动画后，系统不会帮我们做
+						transitionContext.containerView.addSubview(presentedView!)
+						
+						// 2. 利用transform做动画
+						presentedView?.transform = CGAffineTransform(scaleX: 1.0, y: 0.00001)
+						// 设置view的锚点，transform动画是从锚点开始的，默认锚点在view中间
+						presentedView?.layer.anchorPoint = CGPoint(x: 0.5, y: 0.0)
+						// 3.动画
+						let time = transitionDuration(using: transitionContext)
+						UIView .animate(withDuration: time, animations: { (_) in
+							presentedView?.transform = CGAffineTransform.identity
+						}, completion: { (_) in
+							// 动画完成后必须调用这个方法，不然系统认为动画还在进行，不会结束
+							transitionContext.completeTransition(true)
+						}
+					}
+					
+					// dismiss动画
+					private func animateTransitionForDismiss(using transitionContext: UIViewControllerContextTransitioning) {
+						// 1.获取消失的view
+						let dismissView = transitionContext.view(forKey: .from)
+						
+						// 2.执行动画
+						UIView.animate(withDuration: time, animations: {
+							// 注意，这里y不能为0，view会直接消息掉，系统原因
+							dismissView?.transform = CGAffineTransform(scaleX: 1.0, y: 0.0001)
+						}) { (_) in
+							// 告诉系统结束动画
+							transitionContext.completeTransition(true)
+							// 手动移除view
+							dismissView?.removeFromSuperview()
+						}
+					}
+				}
+				```

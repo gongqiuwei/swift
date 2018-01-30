@@ -16,6 +16,7 @@
 		184DAB3A201F091E002E9DC8 /* PopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184DAB38201F091E002E9DC8 /* PopoverViewController.swift */; };
 		184DAB3B201F091E002E9DC8 /* PopoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184DAB39201F091E002E9DC8 /* PopoverViewController.xib */; };
 		184DAB3D201F653F002E9DC8 /* PopoverPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184DAB3C201F653F002E9DC8 /* PopoverPresentationController.swift */; };
+		184DAB3F20205635002E9DC8 /* PopoverAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184DAB3E20205635002E9DC8 /* PopoverAnimator.swift */; };
 		18E113E6201AB9FA00D4FC3F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E113E5201AB9FA00D4FC3F /* AppDelegate.swift */; };
 		18E113EB201AB9FA00D4FC3F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18E113E9201AB9FA00D4FC3F /* Main.storyboard */; };
 		18E113ED201AB9FA00D4FC3F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18E113EC201AB9FA00D4FC3F /* Assets.xcassets */; };
@@ -60,6 +61,7 @@
 		184DAB38201F091E002E9DC8 /* PopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopoverViewController.swift; sourceTree = "<group>"; };
 		184DAB39201F091E002E9DC8 /* PopoverViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopoverViewController.xib; sourceTree = "<group>"; };
 		184DAB3C201F653F002E9DC8 /* PopoverPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopoverPresentationController.swift; sourceTree = "<group>"; };
+		184DAB3E20205635002E9DC8 /* PopoverAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopoverAnimator.swift; sourceTree = "<group>"; };
 		18E113E2201AB9FA00D4FC3F /* SwiftWeiBo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftWeiBo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18E113E5201AB9FA00D4FC3F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		18E113EA201AB9FA00D4FC3F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 				184DAB38201F091E002E9DC8 /* PopoverViewController.swift */,
 				184DAB39201F091E002E9DC8 /* PopoverViewController.xib */,
 				184DAB3C201F653F002E9DC8 /* PopoverPresentationController.swift */,
+				184DAB3E20205635002E9DC8 /* PopoverAnimator.swift */,
 			);
 			path = UIPopover;
 			sourceTree = "<group>";
@@ -397,6 +400,7 @@
 				184DAB3A201F091E002E9DC8 /* PopoverViewController.swift in Sources */,
 				18FF7726201B689200055AA8 /* ProfileViewController.swift in Sources */,
 				18E113E6201AB9FA00D4FC3F /* AppDelegate.swift in Sources */,
+				184DAB3F20205635002E9DC8 /* PopoverAnimator.swift in Sources */,
 				184DAB36201F035A002E9DC8 /* UIButton-Extension.swift in Sources */,
 				184DAB23201E14EA002E9DC8 /* BaseViewController.swift in Sources */,
 				184DAB25201E1918002E9DC8 /* VisitorView.swift in Sources */,

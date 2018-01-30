@@ -10,6 +10,7 @@ import UIKit
 
 class PopoverPresentationController: UIPresentationController {
 
+    var presentedFrame : CGRect = CGRect.zero
     private lazy var coverView : UIView = UIView()
     
     /*
@@ -21,7 +22,7 @@ class PopoverPresentationController: UIPresentationController {
         super.containerViewWillLayoutSubviews()
         
         // 设置present出来的view的尺寸
-        presentedView?.frame = CGRect(x: 100, y: 55, width: 180, height: 250)
+        presentedView?.frame = presentedFrame;
         presentedView?.backgroundColor = UIColor.clear
         
         // 加一层蒙版
@@ -46,3 +47,4 @@ class PopoverPresentationController: UIPresentationController {
         presentedViewController.dismiss(animated: true, completion: nil)
     }
 }
+
