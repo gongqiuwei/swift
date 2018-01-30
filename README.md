@@ -465,7 +465,7 @@ xcode版本：xcode8.2.1 swift版本：swift3.0
 					adjustsImageWhenHighlighted = false
 				}
 				
-				// swift中规定:重写控件的init(frame方法)或者init()方法,必须重写init?(coder aDecoder: NSCoder)，系统会生成默认的实现
+				// swift中规定:重写控件的init(frame方法)或者init()方法,必须重写init?(coder aDecoder: NSCoder)
 				required init?(coder aDecoder: NSCoder) {
 					fatalError("init(coder:) has not been implemented")
 				}
@@ -480,3 +480,7 @@ xcode版本：xcode8.2.1 swift版本：swift3.0
 				}
 			}
 			```
+			
+	- 仿照iPad的popover效果
+		- 页面布局（图片的保护拉伸）
+		- 自定义modal转场
