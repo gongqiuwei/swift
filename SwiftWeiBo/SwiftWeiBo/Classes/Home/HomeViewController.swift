@@ -34,6 +34,21 @@ class HomeViewController: BaseViewController {
         setupNavgationBar()
     }
 
+    /*
+     测试网络工具类
+     */
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        
+        NetworkTool.shareInstance.request(withType: .post, urlString: "http://httpbin.org/post", parameters: ["name" : "xxx", "age" : 18]) { (result:Any?, error:Error?) in
+            if let error = error {
+                print(error)
+                return
+            }
+            
+            print(result ?? "没有返回数据")
+        }
+        
+    }
 }
 
 //MARK:- UI设定

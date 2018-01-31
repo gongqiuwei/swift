@@ -662,3 +662,72 @@ xcode版本：xcode8.2.1 swift版本：swift3.0
 				
 			end
 			``` 
+			
+	- 基于AFNetworking简单封装请求工具类NetworkTool
+
+		- 方便的测试http的网站：http://httpbin.org 发送哪个请求，将请求的数据封装返回，例如post请求测试地址 `http://httpbin.org/post`
+		- NetworkTool工具类的封装（关注点）
+			- 单例模式的实现
+			- 使用枚举定义请求的类型
+			- 返回数据的回调
+
+		```swift
+		// 如果需要默认值，就必须定义类型，如果不需要默认值，那么无需定义类型
+		enum RequestType : String {
+    		case get = "GET"
+    		case post = "POST"
+		}
+		
+		class NetworkTool: AFHTTPSessionManager {
+		
+			/**
+     		iOS实现单例模式的方法：
+     		1> 通过shareXXX或者defaultXXX拿到的永远是同一个对象
+     		2> 不管通过何种方法，得到的永远是同一个对象
+     
+     		OC中以上2中都采用过，swift中使用第一种方法非常便利
+     		*/
+     		// 使用static类型属性常量来实现单例模式。。。。
+    		static let shareInstance : NetworkTool = {
+        		let tool = NetworkTool()
+        		tool.responseSerializer.acceptableContentTypes?.insert("text/html")
+        		return tool
+    		}()
+    		
+    		func request(withType requestType: RequestType,urlString: String, parameters: Any?, finishedCallBack:((_ result: Any?, _ error: Error?)->())?){
+    		
+    			// 我们可以先定义好闭包然后在到方法里调用，不用每次都在方法里面写很多闭包代码。。。
+    			// 成功回调
+        		let sucessCallBack = { (task:URLSessionDataTask, result:Any?) in
+            		if let finishedCallBack = finishedCallBack {
+                		finishedCallBack(result, nil)
+            		}
+        		}
+    		
+    			// 失败回调
+        		let failureCallBack = { (task:URLSessionDataTask?, error:Error) in
+            		if let finishedCallBack = finishedCallBack {
+                		finishedCallBack(nil, error)
+            		}
+        		}
+        		
+        		// 发送请求
+        		switch requestType {
+        		case .get:
+            		get(urlString, parameters: parameters, progress: nil, success: sucessCallBack, failure: failureCallBack)
+        		case .post:
+            		post(urlString, parameters: parameters, progress: nil, success: sucessCallBack, failure: failureCallBack)
+        		}
+    		}
+		}
+		
+		// 外部调用测试：
+		NetworkTool.shareInstance.request(withType: .post, urlString: "http://httpbin.org/post", parameters: ["name" : "xxx", "age" : 18]) { (result:Any?, error:Error?) in
+            if let error = error {
+                print(error)
+                return
+            }
+            
+            print(result ?? "没有返回数据")
+        }
+		```
