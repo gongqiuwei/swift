@@ -52,7 +52,6 @@ xcode版本：xcode8.2.1 swift版本：swift3.0
 	
 	![](Images/Snip20180126_4.png)
 	
-	
 - 项目主界面初始化
 
 	- 纯代码方式
@@ -490,9 +489,12 @@ xcode版本：xcode8.2.1 swift版本：swift3.0
 		</figure>
 		
 			- 代码： 利用UIImage类 `resizableImageWithCapInsets:resizingMode` & `resizableImageWithCapInsets:`
+			
 			- xcode的assets自带slicing功能
+				
 				- 图文设置(参考:<http://blog.csdn.net/minjing_lin/article/details/51029296>)
 					![](Images/Snip20180130_16.png)
+				
 				- 数字属性设置
 					![](Images/Snip20180130_17.png)
 			
@@ -577,10 +579,10 @@ xcode版本：xcode8.2.1 swift版本：swift3.0
 				 		coverView.addGestureRecognizer(tapGes)
 					 }
 					
-					/// 点击事件监听
-					@objc private func coverViewClicked() {
+					 /// 点击事件监听
+					 @objc private func coverViewClicked() {
 						presentedViewController.dismiss(animated: true, completion: nil)
-					}
+					 }
 				}
 				 ```
 			
@@ -640,3 +642,23 @@ xcode版本：xcode8.2.1 swift版本：swift3.0
 					}
 				}
 				```
+				
+	- cocoapods进行第三方框架管理
+		
+		- 初始化pod  打开到.xcodeproj目录下，pod init初始化podfile文件
+		- pod search AFNetworking (搜寻最新的版本)
+		- podfile文件书写
+			
+			```podfile
+			platform :ios, '9.0'
+			
+			target 'SwiftWeiBo' do
+				use_frameworks!
+				
+				pod 'AFNetworking', '~> 3.1.0'
+				pod 'SVProgressHUD', '~> 2.2.2'
+				pod 'SDWebImage', '~> 4.2.2'
+				pod 'SnapKit', '~> 3.2.0'
+				
+			end
+			``` 
