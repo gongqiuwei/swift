@@ -165,13 +165,14 @@ extension OAuthorViewController {
             
             // 保存account到沙盒
             // 沙盒document目录下
-            var accountPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last!
-            
-            accountPath = accountPath + "/account.plist"
-            print(accountPath)
+//            var accountPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last!
+//            
+//            accountPath = accountPath + "/account.plist"
+//            print(accountPath)
             
             // account对象归档存储
-            NSKeyedArchiver.archiveRootObject(account, toFile: accountPath)
+//            NSKeyedArchiver.archiveRootObject(account, toFile: UserAccountTool().accountPath)
+            UserAccountTool.shareInstance.saveAccount(account: account)
         }
     }
 }

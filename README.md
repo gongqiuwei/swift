@@ -483,19 +483,22 @@ xcode版本：xcode8.2.1 swift版本：swift3.0
 	- 仿照iPad的popover效果
 		
 		- 页面布局（图片的保护拉伸）
-		<figure class="half">
-	    	<img src="Images/Snip20180130_14.png" width="300"/>
-	    	<img src="Images/Snip20180130_15.png" width="300"/>
-		</figure>
+		
+			<figure class="half">
+		    	<img src="Images/Snip20180130_14.png" width="300"/>
+		    	<img src="Images/Snip20180130_15.png" width="300"/>
+			</figure>
 		
 			- 代码： 利用UIImage类 `resizableImageWithCapInsets:resizingMode` & `resizableImageWithCapInsets:`
 			
 			- xcode的assets自带slicing功能
 				
-				- 图文设置(参考:<http://blog.csdn.net/minjing_lin/article/details/51029296>)
+				- 图文设置(参考: <http://blog.csdn.net/minjing_lin/article/details/51029296> )
+				
 					![](Images/Snip20180130_16.png)
 				
 				- 数字属性设置
+				
 					![](Images/Snip20180130_17.png)
 			
 		- 自定义modal转场
@@ -886,3 +889,45 @@ xcode版本：xcode8.2.1 swift版本：swift3.0
 					```
 					
 					- acountTool封装
+
+					```swift
+					// 业务工具类，不需要用到NSObject的一些东西，因此可以不继承自NSObject，更轻量级
+					class UserAccountTool {
+					
+						// 设计成单例
+						static let shareInstance : UserAccountTool = UserAccountTool()
+						
+						// 是否登录，计算属性
+						var isLogin : Bool {
+							if account == nil {
+								return false
+							}
+							
+							guard let expiresDate = account?.expire_date else{
+								return false
+							}
+							
+							// expiresDate比当前时间大，降序
+							return expiresDate.compare(Date()) == ComparisonResult.orderedDescending
+						}
+						
+						// 存储路径，计算属性
+						var accountPath : String {
+							let accountPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last!
+							print(accountPath)
+							return accountPath + "/account.plist"
+						}
+						
+						// 保存一个account对象
+						var account : UserAccount?
+						
+						init() {
+							account = NSKeyedUnarchiver.unarchiveObject(withFile: accountPath) as? UserAccount
+						}
+						
+						func saveAccount(account : UserAccount) {
+							self.account = account
+							NSKeyedArchiver.archiveRootObject(account, toFile: accountPath)
+						}
+					}
+					```

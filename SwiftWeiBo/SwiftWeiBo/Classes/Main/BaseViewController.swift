@@ -11,12 +11,14 @@ import UIKit
 class BaseViewController: UITableViewController {
     
     /// 是否登录
-    var isLogin : Bool = false
+//    var isLogin : Bool = false
+    var isLogin : Bool = UserAccountTool.shareInstance.isLogin
     
     lazy var visitorView : VisitorView = VisitorView.visitorView()
 
     override func loadView() {
         
+        /*
         // 判断用户是否登录
         var accountPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last!
         accountPath = accountPath + "/account.plist"
@@ -31,6 +33,7 @@ class BaseViewController: UITableViewController {
             }
             
         }
+         */
         
         // 判断要加载哪个View
         isLogin ? super.loadView() : setupVisitorView()
