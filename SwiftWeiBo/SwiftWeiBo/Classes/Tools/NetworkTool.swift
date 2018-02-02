@@ -16,6 +16,9 @@ enum RequestType : String {
     case post = "POST"
 }
 
+// 类似于OC的typedef
+typealias FinishedNetCallBack = (_ result:[String:Any]?, _ error:Error?)->()
+
 class NetworkTool: AFHTTPSessionManager {
     
     /*
@@ -67,5 +70,27 @@ class NetworkTool: AFHTTPSessionManager {
             post(urlString, parameters: parameters, progress: nil, success: sucessCallBack, failure: failureCallBack)
         }
         
+    }
+}
+
+//MARK:- 具体api调用
+extension NetworkTool{
+    func loadAccessToken(byCode code:String, finished:@escaping FinishedNetCallBack){
+        
+        let urlString = "https://api.weibo.com/oauth2/access_token"
+        let parameters = ["client_id":app_key, "client_secret": app_secret, "grant_type":"authorization_code", "code":code, "redirect_uri":redirect_uri]
+        
+        request(withType: .post, urlString: urlString, parameters: parameters) { (result: Any?, error : Error?) in
+            finished(result as? [String:Any], error)
+        }
+    }
+    
+    func loadUserInfo(byToken accessToken: String, uid : String, finished: @escaping FinishedNetCallBack) {
+        let urlString = "https://api.weibo.com/2/users/show.json"
+        let parameters = ["access_token" : accessToken, "uid" : uid]
+        
+        request(withType: .get, urlString: urlString, parameters: parameters) { (result:Any?, error:Error?) in
+            finished(result as? [String:Any], error)
+        }
     }
 }

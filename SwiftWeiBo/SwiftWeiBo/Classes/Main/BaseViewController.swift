@@ -11,11 +11,28 @@ import UIKit
 class BaseViewController: UITableViewController {
     
     /// 是否登录
-    var isLogin : Bool = true
+    var isLogin : Bool = false
     
     lazy var visitorView : VisitorView = VisitorView.visitorView()
 
     override func loadView() {
+        
+        // 判断用户是否登录
+        var accountPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last!
+        accountPath = accountPath + "/account.plist"
+        
+        if let account = NSKeyedUnarchiver.unarchiveObject(withFile: accountPath) as? UserAccount {
+            // 有account对象
+            if let expireDate = account.expire_date {
+                // 有过期时间，判断是否过期
+                let result = expireDate.compare(Date())
+                // 降序，也就是expireDate大
+                isLogin = (result == .orderedDescending)
+            }
+            
+        }
+        
+        // 判断要加载哪个View
         isLogin ? super.loadView() : setupVisitorView()
     }
 }
@@ -41,6 +58,8 @@ extension BaseViewController {
     }
     
     @objc fileprivate func loginBtnClicked() {
-        print("--loginBtnClicked--")
+        let authorVc = OAuthorViewController()
+        let authorNav = UINavigationController(rootViewController: authorVc)
+        present(authorNav, animated: true, completion: nil)
     }
 }

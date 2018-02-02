@@ -731,3 +731,158 @@ xcode版本：xcode8.2.1 swift版本：swift3.0
             print(result ?? "没有返回数据")
         }
 		```
+		
+		
+	- sina微博auth授权
+		- 注册成为开发者，并注册app，获取app相关信息
+			
+			- 回调网址 http://www.baidu.com
+			- App Key：4061287819
+			- App Secret：6be87e2c73f46562c27621c2d9d70256
+		- 加载微博OAuthor授权网页
+
+			OAuthorViewController.switf中
+			
+			- 加载web页面
+				
+			```swift
+			/// 加载web授权页面
+			fileprivate func loadWebPage() {
+    			let urlString = "https://api.weibo.com/oauth2/authorize?client_id=\(app_key)&redirect_uri=\(redirect_uri)"
+    			guard let url = URL(string: urlString) else {
+        			return
+    			}
+    			let request = URLRequest(url: url)
+    			webView.loadRequest(request)
+			}
+			```
+				
+			- 获取code(利用webview代理方法，拦截web请求)
+			
+			```swift
+			func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+				// 获取url
+        		guard let urlString = request.url?.absoluteString else {
+            		print("没有url")
+            		return true
+        		}
+        		
+        		// 判断是否有code
+        		guard urlString.contains("code=") else {
+           			// 不包含code=， 不做处理
+            		return true
+        		}
+        		
+        		// 包含code=, 截取code=后面的字符串
+        		guard let code = urlString.components(separatedBy: "code=").last else {
+            		// 截取不到字符串
+            		return true
+        		}
+        		
+        		// 利用code去获取access_token
+        		loadAccessToken(byCode: code)
+			}
+			```
+			
+			- 利用code获取access_token
+
+			```swift
+			fileprivate func loadAccessToken(byCode code: String) {
+				// 请求网络
+        		NetworkTool.shareInstance.loadAccessToken(byCode: code) { (result:[String : Any]?, error:Error?) in
+				
+				// 可选绑定， 有值执行{}内语句
+            	if let error = error {
+                	print(error)
+                	return
+            	}
+            	
+            	// 判断result是否有值
+            	guard let resultDict = result  else {
+                	print("没有授权后的数据")
+                	return
+            	}
+            	
+            	// 有值的时候，取出里面的信息, 转化成UserAccount模型
+            	let account = UserAccount(dict: resultDict)
+            	print(String(reflecting: account))
+			}
+			```
+			- 保存access_token（UserAcount模型）
+				- 自定义构造函数，利用字典进行构造 `init(dict:[String:Any])`
+				- 当字典有其他键值对的时候，需要重写`override func setValue(_ value: Any?, forUndefinedKey key: String)`
+				- 对象的自定义log输出，
+					- 遵守CustomDebugStringConvertible协议
+					- 重写`override var debugDescription: String`
+					- 模型转字典：`dictionaryWithValues(forKeys: ["access_token", "expires_in", "uid"]).debugDescription`
+					- 使用自定义对象的log：`print(String(reflecting: account))`
+			- 利用access_token获取用户信息
+				- 接口请求：http://open.weibo.com/wiki/2/users/show
+			
+			- 自定义UserAccount对象的存储
+				- 自定义对象写入文件需要遵守NSCoding协议，进行归档&解档
+				
+				```swift
+				//MARK:- NSCoding
+			    /// 归档
+			    required init?(coder aDecoder: NSCoder) {
+			        access_token = aDecoder.decodeObject(forKey: "access_token") as? String
+			        uid = aDecoder.decodeObject(forKey: "uid") as? String
+			        expire_date = aDecoder.decodeObject(forKey: "expire_date") as? Date
+			        screen_name = aDecoder.decodeObject(forKey: "screen_name") as? String
+			        avatar_large = aDecoder.decodeObject(forKey: "avatar_large") as? String
+			    }
+			    
+			    /// 解档
+			    func encode(with aCoder: NSCoder) {
+			        aCoder.encode(access_token, forKey: "access_token")
+			        aCoder.encode(uid, forKey: "uid")
+			        aCoder.encode(expire_date, forKey: "expire_date")
+			        aCoder.encode(screen_name, forKey: "screen_name")
+			        aCoder.encode(avatar_large, forKey: "avatar_large")
+			    }
+			    
+			    // 对象归档
+			    // account对象归档存储
+            	NSKeyedArchiver.archiveRootObject(account, toFile: accountPath)
+            	// 解档
+            	let account = NSKeyedUnarchiver.unarchiveObject(withFile: accountPath) as? UserAccount
+				```
+				
+				- 创建accountTool工具类处理account相关
+					- account处理代码散落各处，到时候维护可能会比较困难，例如：修改存储路径，存储和获取account地方代码都需要修改，而不再一个文件内部，会产生问题； 再例如：获取account判断是否登录，每个使用到的地方都需要写一堆代码。因此，对这些进行一层业务工具类的封装处理
+					
+					```swift
+					OAuthorViewController中保存account
+					{
+					// 保存account到沙盒
+            		// 沙盒document目录下
+            		var accountPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last!
+            
+            		accountPath = accountPath + "/account.plist"
+            		print(accountPath)
+            
+            		// account对象归档存储
+            		NSKeyedArchiver.archiveRootObject(account, toFile: accountPath)
+            		}
+            		
+            		
+            		BaseViewController中获取account
+            		{
+	            		// 判断用户是否登录
+	        			var accountPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last!
+	        			accountPath = accountPath + "/account.plist"
+        
+        				if let account = NSKeyedUnarchiver.unarchiveObject(withFile: accountPath) as? UserAccount {
+		            			// 有account对象
+		            			if let expireDate = account.expire_date {
+		                		// 有过期时间，判断是否过期
+		                		let result = expireDate.compare(Date())
+		                		// 降序，也就是expireDate大
+		                		isLogin = (result == .orderedDescending)
+	            			}
+            			}
+        }
+					```
+					
+					- acountTool封装
