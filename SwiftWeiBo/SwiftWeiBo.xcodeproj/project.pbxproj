@@ -19,6 +19,8 @@
 		184DAB3D201F653F002E9DC8 /* PopoverPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184DAB3C201F653F002E9DC8 /* PopoverPresentationController.swift */; };
 		184DAB3F20205635002E9DC8 /* PopoverAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184DAB3E20205635002E9DC8 /* PopoverAnimator.swift */; };
 		184DAB41202160F6002E9DC8 /* NetworkTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184DAB40202160F6002E9DC8 /* NetworkTool.swift */; };
+		186E07662025DE2200EDAA22 /* WellcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186E07642025DE2200EDAA22 /* WellcomeViewController.swift */; };
+		186E07672025DE2200EDAA22 /* WellcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 186E07652025DE2200EDAA22 /* WellcomeViewController.xib */; };
 		187A500E2023FB7C001D5145 /* UserAccountTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187A500D2023FB7C001D5145 /* UserAccountTool.swift */; };
 		18D5C5A52021E02B00569679 /* OAuthorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D5C5A32021E02B00569679 /* OAuthorViewController.swift */; };
 		18D5C5A62021E02B00569679 /* OAuthorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18D5C5A42021E02B00569679 /* OAuthorViewController.xib */; };
@@ -72,6 +74,8 @@
 		184DAB3C201F653F002E9DC8 /* PopoverPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopoverPresentationController.swift; sourceTree = "<group>"; };
 		184DAB3E20205635002E9DC8 /* PopoverAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopoverAnimator.swift; sourceTree = "<group>"; };
 		184DAB40202160F6002E9DC8 /* NetworkTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkTool.swift; sourceTree = "<group>"; };
+		186E07642025DE2200EDAA22 /* WellcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WellcomeViewController.swift; sourceTree = "<group>"; };
+		186E07652025DE2200EDAA22 /* WellcomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WellcomeViewController.xib; sourceTree = "<group>"; };
 		187A500D2023FB7C001D5145 /* UserAccountTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAccountTool.swift; sourceTree = "<group>"; };
 		18D5C5A32021E02B00569679 /* OAuthorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthorViewController.swift; sourceTree = "<group>"; };
 		18D5C5A42021E02B00569679 /* OAuthorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OAuthorViewController.xib; sourceTree = "<group>"; };
@@ -155,6 +159,15 @@
 				184DAB3E20205635002E9DC8 /* PopoverAnimator.swift */,
 			);
 			path = UIPopover;
+			sourceTree = "<group>";
+		};
+		186E07632025DDF500EDAA22 /* Wellcome */ = {
+			isa = PBXGroup;
+			children = (
+				186E07642025DE2200EDAA22 /* WellcomeViewController.swift */,
+				186E07652025DE2200EDAA22 /* WellcomeViewController.xib */,
+			);
+			name = Wellcome;
 			sourceTree = "<group>";
 		};
 		18D5C5A22021DFFF00569679 /* OAuthor */ = {
@@ -255,6 +268,7 @@
 		18FF771A201B664C00055AA8 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				186E07632025DDF500EDAA22 /* Wellcome */,
 				18D5C5A22021DFFF00569679 /* OAuthor */,
 				18FF7729201C35BB00055AA8 /* MainVCSettings.json */,
 				18FF771D201B681800055AA8 /* MainViewController.swift */,
@@ -441,6 +455,7 @@
 				18FF772F201CD1BD00055AA8 /* Message.storyboard in Resources */,
 				184DAB27201E192C002E9DC8 /* VisitorView.xib in Resources */,
 				18FF772A201C35BB00055AA8 /* MainVCSettings.json in Resources */,
+				186E07672025DE2200EDAA22 /* WellcomeViewController.xib in Resources */,
 				18FF772D201CD17D00055AA8 /* Home.storyboard in Resources */,
 				18FF7733201CD1DC00055AA8 /* Profile.storyboard in Resources */,
 				18FF7731201CD1CF00055AA8 /* Discover.storyboard in Resources */,
@@ -608,6 +623,7 @@
 			files = (
 				18D5C5A82021FEC300569679 /* Common.swift in Sources */,
 				184DAB3D201F653F002E9DC8 /* PopoverPresentationController.swift in Sources */,
+				186E07662025DE2200EDAA22 /* WellcomeViewController.swift in Sources */,
 				18D5C5AA202209A200569679 /* UserAccount.swift in Sources */,
 				184DAB35201F035A002E9DC8 /* UIBarButtonItem-Extension.swift in Sources */,
 				18FF771E201B681800055AA8 /* MainViewController.swift in Sources */,

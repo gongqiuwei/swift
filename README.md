@@ -885,8 +885,10 @@ xcode版本：xcode8.2.1 swift版本：swift3.0
 		                		isLogin = (result == .orderedDescending)
 	            			}
             			}
-        }
+        			}
+					
 					```
+					
 					
 					- acountTool封装
 
@@ -931,3 +933,26 @@ xcode版本：xcode8.2.1 swift版本：swift3.0
 						}
 					}
 					```
+					
+					
+	- 欢迎界面
+		- 布局
+		- NSLayoutConstraint动画: 先修改，在调用layoutIfNeeded刷新布局
+			
+			```swift
+			override func viewDidAppear(_ animated: Bool) {
+        		// 头像动画
+        		iconViewBottomContraints.constant = UIScreen.main.bounds.height - 200
+        
+        		// 弹簧动画
+        		// damping:阻力系数， 0~1 ，越大弹簧效果越小
+        		// SpringVelocity: 初始速度
+        		UIView.animate(withDuration: 1.5, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 5, options: .curveEaseInOut, animations: {
+		            self.view.layoutIfNeeded()
+		        }) { (_) in
+	     		   // 创建Main
+	        		// 不能直接创建Main，而要从storyBoard中加载
+	        		UIApplication.shared.keyWindow?.rootViewController = MainViewController.loadFromStoryBoard()
+        		}
+    	}
+			```

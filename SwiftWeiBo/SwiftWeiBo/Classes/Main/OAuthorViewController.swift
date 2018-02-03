@@ -173,6 +173,13 @@ extension OAuthorViewController {
             // account对象归档存储
 //            NSKeyedArchiver.archiveRootObject(account, toFile: UserAccountTool().accountPath)
             UserAccountTool.shareInstance.saveAccount(account: account)
+            
+            // 弹出欢迎界面
+            let wellcom = WellcomeViewController()
+            let rootVc = UIApplication.shared.keyWindow?.rootViewController
+            self.dismiss(animated: false, completion: { 
+                rootVc?.present(wellcom, animated: false, completion: nil)
+            })
         }
     }
 }

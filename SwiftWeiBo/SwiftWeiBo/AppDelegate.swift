@@ -14,7 +14,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
+    var defaultController : UIViewController {
+        let isLogin = UserAccountTool.shareInstance.isLogin
+        
+        return isLogin ? WellcomeViewController(): MainViewController.loadFromStoryBoard()
+    }
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         // 全局设置tabbar的tintcolor（tintcolor影响选中图片和选中文字颜色）
@@ -22,11 +27,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 全局设置navgationbar的tintcolor
         UINavigationBar.appearance().tintColor = UIColor.orange
         
-        /*
+        
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = MainViewController()
+        window?.rootViewController = defaultController
         window?.makeKeyAndVisible()
-         */
         return true
     }
 

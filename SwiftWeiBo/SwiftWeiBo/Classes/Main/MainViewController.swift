@@ -15,6 +15,11 @@ class MainViewController: UITabBarController {
 //    fileprivate lazy var composeBtn : UIButton = UIButton.createBtn(imageName: "tabbar_compose_icon_add", bgImageName: "tabbar_compose_button")
     fileprivate lazy var composeBtn : UIButton = UIButton(imageName: "tabbar_compose_icon_add", bgImageName: "tabbar_compose_button")
     
+    class func loadFromStoryBoard() -> MainViewController {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        return sb.instantiateInitialViewController() as! MainViewController
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
