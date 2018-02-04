@@ -27,6 +27,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 全局设置navgationbar的tintcolor
         UINavigationBar.appearance().tintColor = UIColor.orange
         
+        let str = "Sun Feb 01 21:20:03 +0800 2013"
+        let timeStr = Date.createAtText(from: str)
+        print(timeStr)
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = BaseViewController()
+        window?.makeKeyAndVisible()
+        return true
+        
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = defaultController
