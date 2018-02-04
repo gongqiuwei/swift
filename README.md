@@ -954,5 +954,12 @@ xcode版本：xcode8.2.1 swift版本：swift3.0
 	        		// 不能直接创建Main，而要从storyBoard中加载
 	        		UIApplication.shared.keyWindow?.rootViewController = MainViewController.loadFromStoryBoard()
         		}
-    	}
+    		}
 			```
+			
+			
+	- home主页面
+	
+		 - 请求数据
+		 - 解析数据，模型转换
+		 - 数据处理

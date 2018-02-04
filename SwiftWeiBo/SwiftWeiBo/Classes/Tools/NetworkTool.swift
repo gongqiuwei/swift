@@ -40,7 +40,7 @@ class NetworkTool: AFHTTPSessionManager {
     /*
      测试http的网站：http://httpbin.org 发送哪个请求，将请求的数据封装返回
      */
-    func request(withType requestType: RequestType,urlString: String, parameters: Any?, finishedCallBack:((_ result: Any?, _ error: Error?)->())?){
+    fileprivate func request(withType requestType: RequestType,urlString: String, parameters: Any?, finishedCallBack:((_ result: Any?, _ error: Error?)->())?){
 //        get(urlString, parameters: parameters, progress: nil, success: { (task:URLSessionDataTask, result: Any?) in
 //            print(result ?? "没有返回数据")
 //        }) { (task: URLSessionDataTask?, error: Error) in
@@ -92,5 +92,22 @@ extension NetworkTool{
         request(withType: .get, urlString: urlString, parameters: parameters) { (result:Any?, error:Error?) in
             finished(result as? [String:Any], error)
         }
+    }
+    
+    func loadStatus(finished:@escaping (_ result:[[String:Any]]?, _ error:Error?)->()) {
+        
+        let urlStr = "https://api.weibo.com/2/statuses/home_timeline.json"
+        let paramaters = ["access_token":(UserAccountTool.shareInstance.account?.access_token)!]
+        
+        request(withType: .get, urlString: urlStr, parameters: paramaters) { (result:Any?, error:Error?) in
+            
+            // 对result进行处理后返回
+            let resultDict = result as? [String:Any]
+            let statusesArr = resultDict?["statuses"]
+            finished(statusesArr as? [[String:Any]], error)
+            
+            print(statusesArr ?? "空值")
+        }
+        
     }
 }

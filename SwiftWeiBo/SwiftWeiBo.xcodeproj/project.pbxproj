@@ -21,6 +21,7 @@
 		184DAB41202160F6002E9DC8 /* NetworkTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184DAB40202160F6002E9DC8 /* NetworkTool.swift */; };
 		186E07662025DE2200EDAA22 /* WellcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186E07642025DE2200EDAA22 /* WellcomeViewController.swift */; };
 		186E07672025DE2200EDAA22 /* WellcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 186E07652025DE2200EDAA22 /* WellcomeViewController.xib */; };
+		186E076A2027220D00EDAA22 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186E07692027220D00EDAA22 /* Status.swift */; };
 		187A500E2023FB7C001D5145 /* UserAccountTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187A500D2023FB7C001D5145 /* UserAccountTool.swift */; };
 		18D5C5A52021E02B00569679 /* OAuthorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D5C5A32021E02B00569679 /* OAuthorViewController.swift */; };
 		18D5C5A62021E02B00569679 /* OAuthorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18D5C5A42021E02B00569679 /* OAuthorViewController.xib */; };
@@ -76,6 +77,7 @@
 		184DAB40202160F6002E9DC8 /* NetworkTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkTool.swift; sourceTree = "<group>"; };
 		186E07642025DE2200EDAA22 /* WellcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WellcomeViewController.swift; sourceTree = "<group>"; };
 		186E07652025DE2200EDAA22 /* WellcomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WellcomeViewController.xib; sourceTree = "<group>"; };
+		186E07692027220D00EDAA22 /* Status.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
 		187A500D2023FB7C001D5145 /* UserAccountTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAccountTool.swift; sourceTree = "<group>"; };
 		18D5C5A32021E02B00569679 /* OAuthorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthorViewController.swift; sourceTree = "<group>"; };
 		18D5C5A42021E02B00569679 /* OAuthorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OAuthorViewController.xib; sourceTree = "<group>"; };
@@ -170,6 +172,14 @@
 			name = Wellcome;
 			sourceTree = "<group>";
 		};
+		186E0768202721FA00EDAA22 /* HomeModel */ = {
+			isa = PBXGroup;
+			children = (
+				186E07692027220D00EDAA22 /* Status.swift */,
+			);
+			name = HomeModel;
+			sourceTree = "<group>";
+		};
 		18D5C5A22021DFFF00569679 /* OAuthor */ = {
 			isa = PBXGroup;
 			children = (
@@ -258,6 +268,7 @@
 		18FF7719201B664C00055AA8 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				186E0768202721FA00EDAA22 /* HomeModel */,
 				184DAB37201F0865002E9DC8 /* UIPopover */,
 				18FF772B201CD17D00055AA8 /* Home.storyboard */,
 				18FF771F201B687000055AA8 /* HomeViewController.swift */,
@@ -623,6 +634,7 @@
 			files = (
 				18D5C5A82021FEC300569679 /* Common.swift in Sources */,
 				184DAB3D201F653F002E9DC8 /* PopoverPresentationController.swift in Sources */,
+				186E076A2027220D00EDAA22 /* Status.swift in Sources */,
 				186E07662025DE2200EDAA22 /* WellcomeViewController.swift in Sources */,
 				18D5C5AA202209A200569679 /* UserAccount.swift in Sources */,
 				184DAB35201F035A002E9DC8 /* UIBarButtonItem-Extension.swift in Sources */,

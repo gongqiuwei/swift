@@ -19,6 +19,8 @@ class HomeViewController: BaseViewController {
         self?.titleButton.isSelected = isPresented
     })
     
+    fileprivate lazy var statuses:[Status] = [Status]()
+    
     //MARK: - 系统周期函数
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,11 +34,12 @@ class HomeViewController: BaseViewController {
         
         // 登录状态下
         setupNavgationBar()
+        loadStatus()
     }
 
     /*
-     测试网络工具类
-     */
+    // 测试网络工具类
+ 
     override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         
         NetworkTool.shareInstance.request(withType: .post, urlString: "http://httpbin.org/post", parameters: ["name" : "xxx", "age" : 18]) { (result:Any?, error:Error?) in
@@ -49,6 +52,7 @@ class HomeViewController: BaseViewController {
         }
         
     }
+     */
 }
 
 //MARK:- UI设定
@@ -87,4 +91,43 @@ extension HomeViewController {
     }
 }
 
+//MARK:- 网络请求
+extension HomeViewController {
+    fileprivate func loadStatus() {
+        NetworkTool.shareInstance.loadStatus { (result:[[String : Any]]?, error:Error?) in
+            if let error = error {
+                print(error, "loadStatus请求错误")
+                return
+            }
+            
+            guard let resultArr = result  else{
+                return
+            }
+            
+            // 字典转模型
+            for dict in resultArr {
+                let status = Status(with: dict)
+                self.statuses.append(status)
+            }
+            
+            self.tableView.reloadData()
+        }
+    }
+}
 
+
+//MARK:- tableView代理方法
+extension HomeViewController{
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return statuses.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "HomeCellID")!
+        
+        let status = statuses[indexPath.row]
+        cell.textLabel?.text = status.text
+        
+        return cell
+    }
+}
