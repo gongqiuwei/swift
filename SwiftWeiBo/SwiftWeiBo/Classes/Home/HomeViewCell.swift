@@ -11,11 +11,15 @@ import SDWebImage
 
 // 边距
 private let cellEdgeMargin: CGFloat = 15
+// 图片item之间的距离
+private let itemMargin: CGFloat = 10
 
 class HomeViewCell: UITableViewCell {
 
     //MARK:- 约束属性
     @IBOutlet weak var contentLabelWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var picViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var picViewWidthConstraint: NSLayoutConstraint!
     
     //MARK:- UI属性
     @IBOutlet weak var iconView: UIImageView!
@@ -25,6 +29,8 @@ class HomeViewCell: UITableViewCell {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var sourceLabel: UILabel!
     @IBOutlet weak var contentLabel: UILabel!
+    @IBOutlet weak var picView: UICollectionView!
+    
     
     //MARK:- ViewModel
     var viewModel: StatusViewModel? {
@@ -42,6 +48,11 @@ class HomeViewCell: UITableViewCell {
             timeLabel.text = viewModel.createAtText
             sourceLabel.text = viewModel.sourceText
             contentLabel.text = viewModel.status?.text
+            
+            // 设置picView
+            let picSize = caculatePicViewSize(count: viewModel.picUrls.count)
+            picViewHeightConstraint.constant = picSize.height
+            picViewWidthConstraint.constant = picSize.width
         }
     }
     
@@ -55,4 +66,28 @@ class HomeViewCell: UITableViewCell {
 
 }
 
-
+//MARK:- 计算方法
+extension HomeViewCell {
+    fileprivate func caculatePicViewSize(count: Int) -> CGSize {
+        // 0个
+        if count == 0 {
+            return CGSize.zero
+        }
+        
+        
+        let picW = UIScreen.main.bounds.width - 2*cellEdgeMargin
+        let imageWH = (picW - 2*itemMargin) / 3 // 假设图片为正方形
+        // 四个
+        if count == 4 {
+            let picWH = imageWH * 2 + itemMargin
+            return CGSize(width: picWH, height: picWH)
+        }
+        
+        // 单个
+        
+        // 其他情况
+        let rows = CGFloat((count - 1) / 3 + 1)  // 九宫格算法
+        let picH = rows * imageWH + (rows-1) * itemMargin
+        return CGSize(width: picW, height: picH)
+    }
+}

@@ -18,6 +18,7 @@ class StatusViewModel: NSObject {
     var verifiedImage: UIImage?
     var vipImage: UIImage?
     var iconUrl: URL?
+    var picUrls: [URL] = [URL]()
     
     init(status:Status) {
         self.status = status
@@ -62,6 +63,19 @@ class StatusViewModel: NSObject {
         // 5.处理iconUrl
         let iconUrlStr = status.user?.profile_image_url ?? ""
         iconUrl = URL(string: iconUrlStr)
+        
+        // 6.处理picUrls
+        if let pic_urls = status.pic_urls {
+            for picDict in pic_urls {
+                guard let urlStr = picDict["thumbnail_pic"] else {
+                    continue
+                }
+                
+                // 保证传入的urlstring能够生成一个url，因为
+                let url = URL(string: urlStr)!
+                picUrls.append(url)
+            }
+        }
     }
     
 }

@@ -44,9 +44,11 @@ class Status: NSObject {
 //        }
 //    }
     // 微博的正文
-    var text : String?
+    var text: String?
     // 微博的ID
-    var mid : Int = 0
+    var mid: Int = 0
+    // 微博配图
+    var pic_urls: [[String: String]]?
     
     var user : User?
     

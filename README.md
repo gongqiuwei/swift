@@ -977,4 +977,21 @@ xcode版本：xcode8.2.1 swift版本：swift3.0
 		 			tableView.estimatedRowHeight = 200
 		 			```
 		 	
-		 - aa
+		 	- 配图的展示
+		 		
+		 		- cell中加入配图view
+		 		- StatusViewModel处理pic返回数据
+		 		- 根据pic的个数计算picView的高度并设定`func caculatePicViewSize(count: Int) -> CGSize{}`
+		 			- 处理警告：
+		 			
+		 			![](Images/Snip20180205_1.png)
+		 			
+		 			- 原因分析：picView向上距离contentLabel有10pt间距，向下距离bottom工具栏有10pt间距，当picView的height为0时，这2个约束会产生冲突
+		 			
+		 			![](Images/Snip20180205_2.png)
+		 			
+		 			- 解决方式：降低一个约束的优先级，这里选择降低距离bottm的距离的优先级
+		 			
+		 			![](Images/Snip20180205_4.png)
+		 			
+		 		- 
