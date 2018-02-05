@@ -994,4 +994,35 @@ xcode版本：xcode8.2.1 swift版本：swift3.0
 		 			
 		 			![](Images/Snip20180205_4.png)
 		 			
-		 		- 
+		 		- 单张图片的特殊处理
+		 			- 由于没有返回width、height所以需要先下载好图片，然后计算picView的宽度和高度，在进行处理
+		 			- 缓存图片
+		 			
+		 			```swift
+		 			private func cacheImages(viewModels:[StatusViewModel]) {
+        
+	        			// DispatchGroup组
+	        			let group = DispatchGroup()
+	        
+	        			for viewModel in viewModels {
+	            			for picUrl in viewModel.picUrls {
+	                			// 开始下载前进入group
+	                			group.enter()
+	                			// 开始下载图片
+	                			SDWebImageDownloader.shared().downloadImage(with: picUrl, options: [], progress: nil, completed: { (_, _, _, _) in
+	                    			print("保存一张图片")
+	                    			// 下载完成后离开group
+	                    			group.leave()
+	                			})
+	            			}
+	        			}
+        
+        				// 等待图片全部下载完成，reloaddata
+        				group.notify(queue: DispatchQueue.main) { 
+            				print("下载完成")
+            				self.tableView.reloadData()
+        				}
+    				}
+		 			```
+		 			
+		 			- 根据缓存的图片计算单行图片时候的picView的高度

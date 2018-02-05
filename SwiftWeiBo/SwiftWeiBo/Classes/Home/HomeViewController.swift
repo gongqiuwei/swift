@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SDWebImage
 
 class HomeViewController: BaseViewController {
 
@@ -100,6 +100,33 @@ extension HomeViewController {
 //                self.statuses.append(status)
             }
             
+            // 缓存图片数据(为了单张图片)
+            self.cacheImages(viewModels: self.viewModels)
+//            self.tableView.reloadData()
+        }
+    }
+    
+    private func cacheImages(viewModels:[StatusViewModel]) {
+        
+        // DispatchGroup组
+        let group = DispatchGroup()
+        
+        for viewModel in viewModels {
+            for picUrl in viewModel.picUrls {
+                // 开始下载前进入group
+                group.enter()
+                // 开始下载图片
+                SDWebImageDownloader.shared().downloadImage(with: picUrl, options: [], progress: nil, completed: { (_, _, _, _) in
+                    print("保存一张图片")
+                    // 下载完成后离开group
+                    group.leave()
+                })
+            }
+        }
+        
+        // 等待图片全部下载完成，reloaddata
+        group.notify(queue: DispatchQueue.main) { 
+            print("下载完成")
             self.tableView.reloadData()
         }
     }

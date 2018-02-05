@@ -106,7 +106,7 @@ extension NetworkTool{
             let statusesArr = resultDict?["statuses"]
             finished(statusesArr as? [[String:Any]], error)
             
-            print(statusesArr ?? "空值")
+            // print(statusesArr ?? "空值")
         }
         
     }

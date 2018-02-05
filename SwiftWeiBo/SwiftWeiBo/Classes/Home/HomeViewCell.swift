@@ -53,12 +53,6 @@ class HomeViewCell: UITableViewCell {
             let picSize = caculatePicViewSize(count: viewModel.picUrls.count)
             picViewHeightConstraint.constant = picSize.height
             picViewWidthConstraint.constant = picSize.width
-            // 设置picView的itemsize
-            let layout = picView.collectionViewLayout as! UICollectionViewFlowLayout
-            let imageWH = (UIScreen.main.bounds.width - 2*cellEdgeMargin - 2*itemMargin) / 3
-            layout.itemSize = CGSize(width: imageWH, height: imageWH)
-            layout.minimumInteritemSpacing = itemMargin
-            layout.minimumLineSpacing = itemMargin
             
             picView.picUrls = viewModel.picUrls
         }
@@ -82,9 +76,15 @@ extension HomeViewCell {
             return CGSize.zero
         }
         
-        
         let picW = UIScreen.main.bounds.width - 2*cellEdgeMargin
         let imageWH = (picW - 2*itemMargin) / 3 // 假设图片为正方形
+        
+        // 设置picView的itemsize
+        let layout = picView.collectionViewLayout as! UICollectionViewFlowLayout
+        layout.itemSize = CGSize(width: imageWH, height: imageWH)
+        layout.minimumInteritemSpacing = itemMargin
+        layout.minimumLineSpacing = itemMargin
+        
         // 四个
         if count == 4 {
             // 会出现像素不足的情况，一般向上取整或者+1像素
@@ -92,7 +92,14 @@ extension HomeViewCell {
             return CGSize(width: picWH, height: picWH)
         }
         
-        // 单个
+        // 单个(由于接口没有返回图片的width和height比例，需要先下载好图片后，在进行处理, )
+        if count == 1 {
+            let urlStr = viewModel?.picUrls.last?.absoluteString
+            if let image = SDImageCache.shared().imageFromDiskCache(forKey: urlStr) {
+                layout.itemSize = CGSize(width: image.size.width * 2, height: image.size.height * 2);
+                return layout.itemSize
+            }
+        }
         
         // 其他情况
         let rows = CGFloat((count - 1) / 3 + 1)  // 九宫格算法
