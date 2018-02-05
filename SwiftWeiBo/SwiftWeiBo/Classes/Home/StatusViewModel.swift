@@ -13,11 +13,11 @@ class StatusViewModel: NSObject {
     var status: Status?
     
     // MARK:- 自己附加处理属性
-    var sourceText:String?
-    var createAtText:String?
-    var verifiedImage : UIImage?
-    var vipImage : UIImage?
-    
+    var sourceText: String?
+    var createAtText: String?
+    var verifiedImage: UIImage?
+    var vipImage: UIImage?
+    var iconUrl: URL?
     
     init(status:Status) {
         self.status = status
@@ -58,6 +58,10 @@ class StatusViewModel: NSObject {
         if mbrank>0 && mbrank<7 {
             vipImage = UIImage(named: "common_icon_membership_level\(mbrank)")
         }
+        
+        // 5.处理iconUrl
+        let iconUrlStr = status.user?.profile_image_url ?? ""
+        iconUrl = URL(string: iconUrlStr)
     }
     
 }

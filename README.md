@@ -963,3 +963,10 @@ xcode版本：xcode8.2.1 swift版本：swift3.0
 		 - 请求数据
 		 - 解析数据，模型转换(Status模型， User模型)
 		 - 数据处理(对模型的原有属性进行处理，保证使用的时候方便快捷)
+		 - HomeViewCell的布局
+		 	
+		 	- 顶部区域布局
+		 	- 底部工具栏布局
+		 	- 利用AutoLayout自动计算cell高度
+		 	
+		 - aa

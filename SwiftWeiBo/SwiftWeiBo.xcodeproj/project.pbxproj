@@ -25,6 +25,7 @@
 		186E076C2027481400EDAA22 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186E076B2027481400EDAA22 /* Date+Extension.swift */; };
 		186E076E2027565900EDAA22 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186E076D2027565900EDAA22 /* User.swift */; };
 		186E07702027EA3900EDAA22 /* StatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186E076F2027EA3900EDAA22 /* StatusViewModel.swift */; };
+		186E07722028013300EDAA22 /* HomeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186E07712028013300EDAA22 /* HomeViewCell.swift */; };
 		187A500E2023FB7C001D5145 /* UserAccountTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187A500D2023FB7C001D5145 /* UserAccountTool.swift */; };
 		18D5C5A52021E02B00569679 /* OAuthorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D5C5A32021E02B00569679 /* OAuthorViewController.swift */; };
 		18D5C5A62021E02B00569679 /* OAuthorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18D5C5A42021E02B00569679 /* OAuthorViewController.xib */; };
@@ -84,6 +85,7 @@
 		186E076B2027481400EDAA22 /* Date+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		186E076D2027565900EDAA22 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		186E076F2027EA3900EDAA22 /* StatusViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusViewModel.swift; sourceTree = "<group>"; };
+		186E07712028013300EDAA22 /* HomeViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewCell.swift; sourceTree = "<group>"; };
 		187A500D2023FB7C001D5145 /* UserAccountTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAccountTool.swift; sourceTree = "<group>"; };
 		18D5C5A32021E02B00569679 /* OAuthorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthorViewController.swift; sourceTree = "<group>"; };
 		18D5C5A42021E02B00569679 /* OAuthorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OAuthorViewController.xib; sourceTree = "<group>"; };
@@ -281,6 +283,7 @@
 				184DAB37201F0865002E9DC8 /* UIPopover */,
 				18FF772B201CD17D00055AA8 /* Home.storyboard */,
 				18FF771F201B687000055AA8 /* HomeViewController.swift */,
+				186E07712028013300EDAA22 /* HomeViewCell.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -658,6 +661,7 @@
 				18FF7726201B689200055AA8 /* ProfileViewController.swift in Sources */,
 				18E113E6201AB9FA00D4FC3F /* AppDelegate.swift in Sources */,
 				186E07702027EA3900EDAA22 /* StatusViewModel.swift in Sources */,
+				186E07722028013300EDAA22 /* HomeViewCell.swift in Sources */,
 				184DAB3F20205635002E9DC8 /* PopoverAnimator.swift in Sources */,
 				184DAB36201F035A002E9DC8 /* UIButton-Extension.swift in Sources */,
 				184DAB23201E14EA002E9DC8 /* BaseViewController.swift in Sources */,

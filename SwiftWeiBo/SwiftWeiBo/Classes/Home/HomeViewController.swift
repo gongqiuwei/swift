@@ -126,10 +126,9 @@ extension HomeViewController{
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "HomeCellID")!
+        let cell = tableView.dequeueReusableCell(withIdentifier: "HomeCellID") as! HomeViewCell
         
-        let viewModel = viewModels[indexPath.row]
-        cell.textLabel?.text = viewModel.sourceText
+        cell.viewModel = viewModels[indexPath.row]
         
         return cell
     }
