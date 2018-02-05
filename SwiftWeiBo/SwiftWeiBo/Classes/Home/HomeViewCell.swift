@@ -29,7 +29,7 @@ class HomeViewCell: UITableViewCell {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var sourceLabel: UILabel!
     @IBOutlet weak var contentLabel: UILabel!
-    @IBOutlet weak var picView: UICollectionView!
+    @IBOutlet weak var picView: PicCollectionView!
     
     
     //MARK:- ViewModel
@@ -53,6 +53,14 @@ class HomeViewCell: UITableViewCell {
             let picSize = caculatePicViewSize(count: viewModel.picUrls.count)
             picViewHeightConstraint.constant = picSize.height
             picViewWidthConstraint.constant = picSize.width
+            // 设置picView的itemsize
+            let layout = picView.collectionViewLayout as! UICollectionViewFlowLayout
+            let imageWH = (UIScreen.main.bounds.width - 2*cellEdgeMargin - 2*itemMargin) / 3
+            layout.itemSize = CGSize(width: imageWH, height: imageWH)
+            layout.minimumInteritemSpacing = itemMargin
+            layout.minimumLineSpacing = itemMargin
+            
+            picView.picUrls = viewModel.picUrls
         }
     }
     
@@ -79,7 +87,8 @@ extension HomeViewCell {
         let imageWH = (picW - 2*itemMargin) / 3 // 假设图片为正方形
         // 四个
         if count == 4 {
-            let picWH = imageWH * 2 + itemMargin
+            // 会出现像素不足的情况，一般向上取整或者+1像素
+            let picWH = imageWH * 2 + itemMargin + 1
             return CGSize(width: picWH, height: picWH)
         }
         

@@ -151,9 +151,9 @@
                                                 <constraint firstItem="OUk-Gd-sPv" firstAttribute="leading" secondItem="p3L-0m-Ndk" secondAttribute="trailing" id="z7G-H8-UfB"/>
                                             </constraints>
                                         </view>
-                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="PWp-nv-cTU" userLabel="图片展示">
+                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="PWp-nv-cTU" userLabel="图片展示" customClass="PicCollectionView" customModule="SwiftWeiBo" customModuleProvider="target">
                                             <rect key="frame" x="15" y="114" width="182" height="58"/>
-                                            <color key="backgroundColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="58" id="r3n-iU-uV3"/>
                                                 <constraint firstAttribute="width" constant="182" id="sg5-vo-uhW"/>
@@ -165,13 +165,27 @@
                                                 <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                             </collectionViewFlowLayout>
                                             <cells>
-                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="3Ny-yS-Dik">
+                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HomePicCellId" id="3Ny-yS-Dik" customClass="PicCollectionCell" customModule="SwiftWeiBo" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                         <autoresizingMask key="autoresizingMask"/>
+                                                        <subviews>
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GEi-Rb-JCh">
+                                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                            </imageView>
+                                                        </subviews>
                                                     </view>
+                                                    <constraints>
+                                                        <constraint firstItem="GEi-Rb-JCh" firstAttribute="top" secondItem="3Ny-yS-Dik" secondAttribute="top" id="8Qw-TY-vy8"/>
+                                                        <constraint firstAttribute="trailing" secondItem="GEi-Rb-JCh" secondAttribute="trailing" id="YHm-b1-d81"/>
+                                                        <constraint firstAttribute="bottom" secondItem="GEi-Rb-JCh" secondAttribute="bottom" id="i7G-sh-t5Z"/>
+                                                        <constraint firstItem="GEi-Rb-JCh" firstAttribute="leading" secondItem="3Ny-yS-Dik" secondAttribute="leading" id="mNl-C3-Pby"/>
+                                                    </constraints>
+                                                    <connections>
+                                                        <outlet property="iconView" destination="GEi-Rb-JCh" id="kvt-ZO-0nZ"/>
+                                                    </connections>
                                                 </collectionViewCell>
                                             </cells>
                                         </collectionView>
