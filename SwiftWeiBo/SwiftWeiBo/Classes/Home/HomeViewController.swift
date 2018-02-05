@@ -19,7 +19,8 @@ class HomeViewController: BaseViewController {
         self?.titleButton.isSelected = isPresented
     })
     
-    fileprivate lazy var statuses:[Status] = [Status]()
+//    fileprivate lazy var statuses:[Status] = [Status]()
+    fileprivate lazy var viewModels:[StatusViewModel] = [StatusViewModel]()
     
     //MARK: - 系统周期函数
     override func viewDidLoad() {
@@ -107,7 +108,9 @@ extension HomeViewController {
             // 字典转模型
             for dict in resultArr {
                 let status = Status(with: dict)
-                self.statuses.append(status)
+                let viewModel = StatusViewModel(status: status)
+                self.viewModels.append(viewModel)
+//                self.statuses.append(status)
             }
             
             self.tableView.reloadData()
@@ -119,14 +122,14 @@ extension HomeViewController {
 //MARK:- tableView代理方法
 extension HomeViewController{
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return statuses.count
+        return viewModels.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HomeCellID")!
         
-        let status = statuses[indexPath.row]
-        cell.textLabel?.text = status.text
+        let viewModel = viewModels[indexPath.row]
+        cell.textLabel?.text = viewModel.sourceText
         
         return cell
     }
