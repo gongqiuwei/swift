@@ -36,6 +36,10 @@ class HomeViewController: BaseViewController {
         // 登录状态下
         setupNavgationBar()
         loadStatus()
+        
+        // tableView设定
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 200
     }
 
     /*

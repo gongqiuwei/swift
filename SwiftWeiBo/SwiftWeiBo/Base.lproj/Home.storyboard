@@ -69,8 +69,8 @@
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="微博正文" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LSb-54-3Lc" userLabel="正文label">
-                                            <rect key="frame" x="15" y="65" width="62" height="18"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="微博正文" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LSb-54-3Lc" userLabel="正文label">
+                                            <rect key="frame" x="15" y="65" width="62" height="107"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="61.5" id="4Fq-Lr-eTW"/>
                                             </constraints>
@@ -170,6 +170,7 @@
                                         <constraint firstItem="Yry-16-NS0" firstAttribute="leading" secondItem="YmG-Pr-nMz" secondAttribute="trailing" constant="8" id="qsx-VL-cKb"/>
                                         <constraint firstItem="U5U-qF-2Js" firstAttribute="leading" secondItem="yEz-iT-e6F" secondAttribute="leading" id="tBM-lL-2XP"/>
                                         <constraint firstAttribute="trailing" secondItem="U5U-qF-2Js" secondAttribute="trailing" id="uPh-3U-7Jb"/>
+                                        <constraint firstItem="U5U-qF-2Js" firstAttribute="top" secondItem="LSb-54-3Lc" secondAttribute="bottom" constant="10" id="xbc-yn-7aB"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>

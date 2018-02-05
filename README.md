@@ -968,5 +968,13 @@ xcode版本：xcode8.2.1 swift版本：swift3.0
 		 	- 顶部区域布局
 		 	- 底部工具栏布局
 		 	- 利用AutoLayout自动计算cell高度
+		 		- 子控件布局中，最上面的子控件和cell有约束关系
+		 		- 子控件布局中，最下面的子控件和cell有约束关系
+		 		- 代码说明需要tableview自动计算cell高度
+		 			
+		 			```swift
+		 			tableView.rowHeight = UITableViewAutomaticDimension
+		 			tableView.estimatedRowHeight = 200
+		 			```
 		 	
 		 - aa
