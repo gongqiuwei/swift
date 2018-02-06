@@ -21,6 +21,7 @@ class HomeViewCell: UITableViewCell {
     @IBOutlet weak var picViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var picViewWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var retweetedContentLabelTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var picViewBottomConstraint: NSLayoutConstraint!
     
     //MARK:- UI属性
     @IBOutlet weak var iconView: UIImageView!
@@ -65,9 +66,15 @@ class HomeViewCell: UITableViewCell {
                 }
                 
                 retweetedBgView.isHidden = false
+                // 有转发微博的时候，距离上面需要15的间距
+                retweetedContentLabelTopConstraint.constant = 15
+                
             } else {
                 retweetedContentLabel.text = nil
                 retweetedBgView.isHidden = true
+                
+                // 没有转发微博的时候，距离上面不需要间距
+                retweetedContentLabelTopConstraint.constant = 0
             }
             
         }
@@ -90,8 +97,15 @@ extension HomeViewCell {
     fileprivate func caculatePicViewSize(count: Int) -> CGSize {
         // 0个
         if count == 0 {
+            
+            // 没有配图的时候调整picView约束
+            picViewBottomConstraint.constant = 0
+            
             return CGSize.zero
         }
+        
+        // 有配图的时候调整picView约束
+        picViewBottomConstraint.constant = 10
         
         let picW = UIScreen.main.bounds.width - 2*cellEdgeMargin
         let imageWH = (picW - 2*itemMargin) / 3 // 假设图片为正方形

@@ -236,6 +236,7 @@
                                     <outlet property="iconView" destination="FH1-eM-PY3" id="lAw-if-c6y"/>
                                     <outlet property="nameLabel" destination="pmY-OB-5ol" id="ykF-cR-515"/>
                                     <outlet property="picView" destination="PWp-nv-cTU" id="Egg-0m-nud"/>
+                                    <outlet property="picViewBottomConstraint" destination="Yvt-VC-FaX" id="jmN-bE-dgJ"/>
                                     <outlet property="picViewHeightConstraint" destination="r3n-iU-uV3" id="eAv-Ew-3tW"/>
                                     <outlet property="picViewWidthConstraint" destination="sg5-vo-uhW" id="Daz-Nm-KsL"/>
                                     <outlet property="retweetedBgView" destination="PFn-Mv-mxT" id="85j-42-oJQ"/>

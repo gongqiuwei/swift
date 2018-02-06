@@ -1075,11 +1075,11 @@ xcode版本：xcode8.2.1 swift版本：swift3.0
 				
 				- cell整体完成后，约束的细节调整
 					
-					- bug1：没有转发微博，没有图片的时候，
+					- bug1：没有转发微博的时候，调整retweetedContentLabel的top约束为0，有为15
 					
 					![](Images/Snip20180206_2.png)	
+					- bug2：没有配图的时候，调整有配图的时候picview的bottom为15，没有的时候为0
 					
-					
-					- bug2：
+					![](Images/Snip20180206_3.png)
 				
 			- aa
