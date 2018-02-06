@@ -8,6 +8,7 @@
 
 import UIKit
 import SDWebImage
+import MJRefresh
 
 class HomeViewController: BaseViewController {
 
@@ -35,17 +36,29 @@ class HomeViewController: BaseViewController {
         
         // 登录状态下
         setupNavgationBar()
-        loadStatus()
         
         // tableView设定
         // 当需要AutoLayout自动计算高度的时候添加这个
         // tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 200
+        
+        setupHeader()
     }
 }
 
 //MARK:- UI设定
 extension HomeViewController {
+    /// 设置刷新控件
+    fileprivate func setupHeader() {
+        let header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(HomeViewController.loadNewStatus))
+        header?.setTitle("下拉刷新", for: .idle)
+        header?.setTitle("释放更新", for: .pulling)
+        header?.setTitle("加载中...", for: .refreshing)
+        
+        tableView.mj_header = header
+        tableView.mj_header.beginRefreshing()
+    }
+    
     /// 设置导航栏
     fileprivate func setupNavgationBar() {
         /*
@@ -82,8 +95,19 @@ extension HomeViewController {
 
 //MARK:- 网络请求
 extension HomeViewController {
-    fileprivate func loadStatus() {
-        NetworkTool.shareInstance.loadStatus { (result:[[String : Any]]?, error:Error?) in
+    @objc fileprivate func loadNewStatus() {
+        loadStatus(isNewData:true)
+    }
+    
+    
+    fileprivate func loadStatus(isNewData: Bool) {
+        
+        var since_id = 0
+        if isNewData {
+            since_id = viewModels.first?.status?.mid ?? 0
+        }
+        
+        NetworkTool.shareInstance.loadStatus(since_id: since_id) { (result:[[String : Any]]?, error:Error?) in
             if let error = error {
                 print(error, "loadStatus请求错误")
                 return
@@ -94,14 +118,20 @@ extension HomeViewController {
             }
             
             // 字典转模型
+            var tempViewModels = [StatusViewModel]()
             for dict in resultArr {
                 let status = Status(with: dict)
                 let viewModel = StatusViewModel(status: status)
-                self.viewModels.append(viewModel)
+//                self.viewModels.append(viewModel)
+                tempViewModels.append(viewModel)
             }
             
+            // 当前的viewmodels
+            self.viewModels = tempViewModels + self.viewModels
+            
             // 缓存图片数据(为了单张图片)
-            self.cacheImages(viewModels: self.viewModels)
+//            self.cacheImages(viewModels: self.viewModels)
+            self.cacheImages(viewModels: tempViewModels)
         }
     }
     
@@ -116,7 +146,7 @@ extension HomeViewController {
                 group.enter()
                 // 开始下载图片
                 SDWebImageDownloader.shared().downloadImage(with: picUrl, options: [], progress: nil, completed: { (_, _, _, _) in
-                    print("保存一张图片")
+                    // print("保存一张图片")
                     // 下载完成后离开group
                     group.leave()
                 })
@@ -125,8 +155,10 @@ extension HomeViewController {
         
         // 等待图片全部下载完成，reloaddata
         group.notify(queue: DispatchQueue.main) { 
-            print("下载完成")
+            // print("下载完成")
             self.tableView.reloadData()
+            
+            self.tableView.mj_header.endRefreshing()
         }
     }
 }
