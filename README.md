@@ -1082,4 +1082,8 @@ xcode版本：xcode8.2.1 swift版本：swift3.0
 					
 					![](Images/Snip20180206_3.png)
 				
-			- aa
+		
+		- cell的高度自己计算，不适用AutoLayout计算
+			- 去掉bottomToolView的底部约束
+			- cell中设置viewModel时强制layout布局，计算最底部的控件的maxY，并保存在viewModel的cellHeight属性中
+			- tableview代理方法返回cell高度

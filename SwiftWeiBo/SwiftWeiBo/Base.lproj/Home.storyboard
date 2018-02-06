@@ -25,7 +25,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PFn-Mv-mxT" userLabel="转发微博的背景">
-                                            <rect key="frame" x="0.0" y="139" width="375" height="121"/>
+                                            <rect key="frame" x="0.0" y="91" width="375" height="121"/>
                                             <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
                                         </view>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar_default_small" translatesAutoresizingMaskIntoConstraints="NO" id="FH1-eM-PY3" userLabel="头像">
@@ -74,7 +74,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="微博正文" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LSb-54-3Lc" userLabel="正文label">
-                                            <rect key="frame" x="15" y="65" width="62" height="66"/>
+                                            <rect key="frame" x="15" y="65" width="62" height="18"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="61.5" id="4Fq-Lr-eTW"/>
                                             </constraints>
@@ -83,13 +83,13 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="转发微博正文" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1j1-0G-slB" userLabel="转发正文label">
-                                            <rect key="frame" x="15" y="146" width="62" height="36"/>
+                                            <rect key="frame" x="15" y="98" width="62" height="36"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="PWp-nv-cTU" userLabel="图片展示" customClass="PicCollectionView" customModule="SwiftWeiBo" customModuleProvider="target">
-                                            <rect key="frame" x="15" y="192" width="182" height="58"/>
+                                            <rect key="frame" x="15" y="144" width="182" height="58"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="58" id="r3n-iU-uV3"/>
@@ -127,7 +127,7 @@
                                             </cells>
                                         </collectionView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U5U-qF-2Js" userLabel="底部工具栏">
-                                            <rect key="frame" x="0.0" y="260" width="375" height="40"/>
+                                            <rect key="frame" x="0.0" y="212" width="375" height="40"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p3L-0m-Ndk">
                                                     <rect key="frame" x="0.0" y="1" width="125" height="32"/>
@@ -205,7 +205,6 @@
                                         <constraint firstItem="LSb-54-3Lc" firstAttribute="leading" secondItem="FH1-eM-PY3" secondAttribute="leading" id="3rB-Xj-CjI"/>
                                         <constraint firstItem="1j1-0G-slB" firstAttribute="width" secondItem="LSb-54-3Lc" secondAttribute="width" id="7Rl-dL-fGu"/>
                                         <constraint firstItem="h3S-tx-gUe" firstAttribute="leading" secondItem="pmY-OB-5ol" secondAttribute="trailing" constant="8" id="7X2-zH-QtA"/>
-                                        <constraint firstAttribute="bottom" secondItem="U5U-qF-2Js" secondAttribute="bottom" id="D9V-r7-LHc"/>
                                         <constraint firstItem="PFn-Mv-mxT" firstAttribute="top" secondItem="LSb-54-3Lc" secondAttribute="bottom" constant="8" id="Drb-gv-5h0"/>
                                         <constraint firstItem="pmY-OB-5ol" firstAttribute="top" secondItem="FH1-eM-PY3" secondAttribute="top" id="FOe-TT-hIN"/>
                                         <constraint firstItem="PFn-Mv-mxT" firstAttribute="leading" secondItem="yEz-iT-e6F" secondAttribute="leading" id="GFp-Wg-hlL"/>
@@ -231,6 +230,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="bottomToolView" destination="U5U-qF-2Js" id="0au-7a-Uad"/>
                                     <outlet property="contentLabel" destination="LSb-54-3Lc" id="NM3-r7-2DW"/>
                                     <outlet property="contentLabelWidthConstraint" destination="4Fq-Lr-eTW" id="7Os-Lp-V0G"/>
                                     <outlet property="iconView" destination="FH1-eM-PY3" id="lAw-if-c6y"/>

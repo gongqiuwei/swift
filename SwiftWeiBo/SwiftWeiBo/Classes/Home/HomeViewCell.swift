@@ -34,6 +34,7 @@ class HomeViewCell: UITableViewCell {
     @IBOutlet weak var picView: PicCollectionView!
     @IBOutlet weak var retweetedContentLabel: UILabel!
     @IBOutlet weak var retweetedBgView: UIView!
+    @IBOutlet weak var bottomToolView: UIView!
     
     //MARK:- ViewModel
     var viewModel: StatusViewModel? {
@@ -77,6 +78,12 @@ class HomeViewCell: UITableViewCell {
                 retweetedContentLabelTopConstraint.constant = 0
             }
             
+            
+            // 手动计算cell的高度
+            // 适用AutoLayout强制刷新布局
+            layoutIfNeeded()
+            
+            viewModel.cellHeight = bottomToolView.frame.maxY
         }
     }
     

@@ -20,6 +20,8 @@ class StatusViewModel: NSObject {
     var iconUrl: URL?
     var picUrls: [URL] = [URL]()
     
+    var cellHeight: CGFloat = 0
+    
     init(status:Status) {
         self.status = status
         
