@@ -50,8 +50,12 @@ class HomeViewCell: UITableViewCell {
             nameLabel.text = viewModel.status?.user?.screen_name
             vipView.image = viewModel.vipImage
             timeLabel.text = viewModel.createAtText
-            sourceLabel.text = viewModel.sourceText
             contentLabel.text = viewModel.status?.text
+            if let sourceText = viewModel.sourceText {
+                sourceLabel.text = "来自" + sourceText
+            } else {
+                sourceLabel.text = nil
+            }
             
             // 设置picView
             let picSize = caculatePicViewSize(count: viewModel.picUrls.count)

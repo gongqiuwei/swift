@@ -94,12 +94,12 @@ extension NetworkTool{
         }
     }
     
-    func loadStatus(since_id: Int ,finished:@escaping (_ result:[[String:Any]]?, _ error:Error?)->()) {
+    func loadStatus(since_id: Int, max_id: Int, finished:@escaping (_ result:[[String:Any]]?, _ error:Error?)->()) {
         
         let urlStr = "https://api.weibo.com/2/statuses/home_timeline.json"
-        let paramaters = ["access_token":(UserAccountTool.shareInstance.account?.access_token)!, "since_id": since_id] as [String:Any]
+        let paramaters = ["access_token":(UserAccountTool.shareInstance.account?.access_token)!, "since_id": since_id, "max_id": max_id] as [String:Any]
         
-        print("paramaters: \(paramaters)")
+        // print("paramaters: \(paramaters)")
         
         request(withType: .get, urlString: urlStr, parameters: paramaters) { (result:Any?, error:Error?) in
             

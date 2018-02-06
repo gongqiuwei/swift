@@ -42,20 +42,23 @@ class HomeViewController: BaseViewController {
         // tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 200
         
-        setupHeader()
+        setupRefresh()
     }
 }
 
 //MARK:- UI设定
 extension HomeViewController {
     /// 设置刷新控件
-    fileprivate func setupHeader() {
+    fileprivate func setupRefresh() {
         let header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(HomeViewController.loadNewStatus))
         header?.setTitle("下拉刷新", for: .idle)
         header?.setTitle("释放更新", for: .pulling)
         header?.setTitle("加载中...", for: .refreshing)
-        
         tableView.mj_header = header
+        
+        let footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(HomeViewController.loadMoreStatus))
+        tableView.mj_footer = footer;
+        
         tableView.mj_header.beginRefreshing()
     }
     
@@ -99,15 +102,23 @@ extension HomeViewController {
         loadStatus(isNewData:true)
     }
     
+    @objc fileprivate func loadMoreStatus() {
+        loadStatus(isNewData: false)
+    }
     
     fileprivate func loadStatus(isNewData: Bool) {
         
         var since_id = 0
+        var max_id = 0
         if isNewData {
             since_id = viewModels.first?.status?.mid ?? 0
+        } else {
+            max_id = viewModels.last?.status?.mid ?? 0
+            // 注意要加括号
+            max_id = max_id == 0 ? 0 : (max_id - 1)
         }
         
-        NetworkTool.shareInstance.loadStatus(since_id: since_id) { (result:[[String : Any]]?, error:Error?) in
+        NetworkTool.shareInstance.loadStatus(since_id: since_id, max_id: max_id) { (result:[[String : Any]]?, error:Error?) in
             if let error = error {
                 print(error, "loadStatus请求错误")
                 return
@@ -122,15 +133,18 @@ extension HomeViewController {
             for dict in resultArr {
                 let status = Status(with: dict)
                 let viewModel = StatusViewModel(status: status)
-//                self.viewModels.append(viewModel)
                 tempViewModels.append(viewModel)
             }
             
             // 当前的viewmodels
-            self.viewModels = tempViewModels + self.viewModels
+            if isNewData {
+                self.viewModels = tempViewModels + self.viewModels
+            } else {
+                self.viewModels += tempViewModels
+            }
+            
             
             // 缓存图片数据(为了单张图片)
-//            self.cacheImages(viewModels: self.viewModels)
             self.cacheImages(viewModels: tempViewModels)
         }
     }
@@ -159,6 +173,7 @@ extension HomeViewController {
             self.tableView.reloadData()
             
             self.tableView.mj_header.endRefreshing()
+            self.tableView.mj_footer.endRefreshing()
         }
     }
 }
