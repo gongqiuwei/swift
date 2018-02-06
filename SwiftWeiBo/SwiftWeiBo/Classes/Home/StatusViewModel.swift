@@ -64,15 +64,22 @@ class StatusViewModel: NSObject {
         let iconUrlStr = status.user?.profile_image_url ?? ""
         iconUrl = URL(string: iconUrlStr)
         
-        // 6.处理picUrls
-        if let pic_urls = status.pic_urls {
+        // 6.处理picUrls, 当有转发时保存转发，没有转发时保存原创
+        // 是否有转发？如何判断
+        // count 为 Int? , 可以与 Int 进行 == , != 比较
+        let count = status.pic_urls?.count
+        let picUrlsDict = count != 0 ?  status.pic_urls : status.retweeted_status?.pic_urls
+        
+        if let pic_urls = picUrlsDict {
             for picDict in pic_urls {
                 guard let urlStr = picDict["thumbnail_pic"] else {
                     continue
                 }
                 
+                //thumbnail_pic是不清晰的图片，将urlStr中的/thumbnail/替换为/bmiddle/就是清晰的，sina的锅
+                let tempstr = urlStr.replacingOccurrences(of: "/thumbnail/", with: "/bmiddle/")
                 // 保证传入的urlstring能够生成一个url，因为
-                let url = URL(string: urlStr)!
+                let url = URL(string: tempstr)!
                 picUrls.append(url)
             }
         }

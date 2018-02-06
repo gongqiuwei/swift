@@ -97,12 +97,10 @@ extension HomeViewController {
                 let status = Status(with: dict)
                 let viewModel = StatusViewModel(status: status)
                 self.viewModels.append(viewModel)
-//                self.statuses.append(status)
             }
             
             // 缓存图片数据(为了单张图片)
             self.cacheImages(viewModels: self.viewModels)
-//            self.tableView.reloadData()
         }
     }
     

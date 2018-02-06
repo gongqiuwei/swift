@@ -1025,4 +1025,61 @@ xcode版本：xcode8.2.1 swift版本：swift3.0
     				}
 		 			```
 		 			
-		 			- 根据缓存的图片计算单行图片时候的picView的高度
+		 			- 根据缓存的图片计算单行图片时候的picView的高度：`func caculatePicViewSize(count: Int) -> CGSize{}`中添加
+		 			- bug修复：picView为collectionview类型，由于计算的高度不足，导致collectionview可以拖动，引起tableview的cell无法拖动
+		 			
+		 			```
+		 			// 会出现像素不足的情况，一般向上取整或者+1像素
+		 			let picH = rows * imageWH + (rows-1) * itemMargin + 1
+		 			```
+		
+		- 转发微博的处理
+			- 获取转发微博数据
+			- cell中展示转发微博
+				
+				- 思路：在之前的基础上，只需要加一个转发微博的内容label即可，由于转发的时候，原创微博的图片是不需要展示的，转发微博的图片可以在原有基础上进行展示，因此只需要添加一个label就可以了
+				- 实现：添加一个retweetedContentLabel, 在contentLabel和picView之间，并且设置好约束， 先添加好其他约束，以显示retweetedContentLabel（top, leading, width=contentLabel.width）,确定位置，最后添加距离picView的约束，产生警告, fix it，修改hugging 的等级，也就是label的高度过大，内容会被拉伸，以适应高度，如果想要保持内容不被拉伸过大，就需要提高等级，以保持内容的紧凑
+				 
+				 ![](Images/Snip20180206_1.png)
+				 
+				- 添加了距离picView的约束后，还是利用AutoLayout自动计算cell高度
+				- 填充数据展示转发微博正文 `viewModel{didSet{}}`
+				- 展示转发微博的配图
+					
+					- StatusViewModel中的picUrls属性是需要展示的图片，因此只要针对数据进行处理，让picUrls没有转发微博时保存原创的图片，有转发时保存转发的图片，就可以不改动UI代码，直接展示图片(ViewModel管理Cell需要展示的数据，使用ViewModel实现了model和UI的分离)
+					- StatusViewModel中对picUrls的处理
+						
+					```swift
+					// 6.处理picUrls, 当有转发时保存转发，没有转发时保存原创
+					// 是否有转发？如何判断
+					// count 为 Int? , 可以与 Int 进行 == , != 比较
+					let count = status.pic_urls?.count
+					let picUrlsDict = count != 0 ?  status.pic_urls : status.retweeted_status?.pic_urls
+					
+					if let pic_urls = picUrlsDict {
+						for picDict in pic_urls {
+							guard let urlStr = picDict["thumbnail_pic"] else {
+								continue
+							}
+							
+							let url = URL(string: tempstr)!
+							picUrls.append(url)
+						}
+					}
+					```
+				
+				- 转发的背景
+					- 背景层级，在转发label，图片picView下
+					- 约束：距离正文label为8， 底部工具栏0
+					- 数据设置：有转发显示，没转发隐藏
+				
+				- cell整体完成后，约束的细节调整
+					
+					- bug1：没有转发微博，没有图片的时候，
+					
+					![](Images/Snip20180206_2.png)	
+					
+					
+					- bug2：
+				
+			- aa
