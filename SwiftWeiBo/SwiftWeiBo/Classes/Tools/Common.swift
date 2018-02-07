@@ -14,3 +14,7 @@ let app_secret = "6be87e2c73f46562c27621c2d9d70256"
 let redirect_uri = "http://www.baidu.com"
 let accountName = "gongqiuwei@sina.com"
 let passwd = "g19870724"
+
+
+let PicPickerViewAddPhotoNotification = "PicPickerViewAddPhotoNotification" 
+

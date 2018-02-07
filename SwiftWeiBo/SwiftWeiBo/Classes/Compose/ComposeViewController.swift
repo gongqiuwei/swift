@@ -15,6 +15,7 @@ class ComposeViewController: UIViewController {
 
     // tool底部的约束
     @IBOutlet weak var toolBarBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var picPickerViewHeightConstraint: NSLayoutConstraint!
     
     
     override func viewDidLoad() {
@@ -27,6 +28,7 @@ class ComposeViewController: UIViewController {
         
         // 添加通知
         NotificationCenter.default.addObserver(self, selector: #selector(ComposeViewController.keyboardWillChangeFrame(note:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ComposeViewController.addPhoto), name: Notification.Name(PicPickerViewAddPhotoNotification), object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -48,6 +50,7 @@ class ComposeViewController: UIViewController {
 }
 
 extension ComposeViewController {
+    
     fileprivate func setupNavItem() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: .plain, target: self, action: #selector(ComposeViewController.closeItemClicked))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "发送", style: .plain, target: self, action: #selector(ComposeViewController.sendItemClicked))
@@ -79,7 +82,44 @@ extension ComposeViewController {
             self.view.layoutIfNeeded()
         }
     }
+    
+    /// 选择图片
+    @IBAction func picPickerClicked() {
+        // 退出键盘
+        textView.resignFirstResponder()
+        
+        // 显示picPickerView
+        picPickerViewHeightConstraint.constant = UIScreen.main.bounds.height * 0.65
+        UIView.animate(withDuration: 0.5) { 
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    /// 添加照片
+    @objc fileprivate func addPhoto() {
+        // 是否有权限
+        if !UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            return
+        }
+        
+        // 创建选择照片
+        let ipc = UIImagePickerController()
+        ipc.sourceType = .photoLibrary
+        ipc.delegate = self
+        present(ipc, animated: true, completion: nil)
+    }
 }
+
+
+extension ComposeViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+    }
+    
+}
+
+
 
 extension ComposeViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {

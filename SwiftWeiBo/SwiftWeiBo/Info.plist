@@ -33,5 +33,7 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>访问相册获取照片</string>
 </dict>
 </plist>

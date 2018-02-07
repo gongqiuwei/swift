@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ComposeViewController" customModule="SwiftWeiBo" customModuleProvider="target">
             <connections>
+                <outlet property="picPickerViewHeightConstraint" destination="7vI-wp-GtR" id="1PE-yH-a4f"/>
                 <outlet property="textView" destination="2sk-CS-lUk" id="yb0-e2-z7o"/>
                 <outlet property="toolBarBottomConstraint" destination="3tq-6Y-X8t" id="T3S-vb-KXu"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -29,6 +30,19 @@
                         <outlet property="delegate" destination="-1" id="Yuc-Fd-hvA"/>
                     </connections>
                 </textView>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="KA1-0f-ykM" customClass="PicPickerCollectionView" customModule="SwiftWeiBo" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="667" width="375" height="0.0"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" id="7vI-wp-GtR"/>
+                    </constraints>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="I4U-yn-HW5">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
                 <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Yt-hV-bo6">
                     <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                     <constraints>
@@ -42,6 +56,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="compose_toolbar_picture"/>
                                 <state key="highlighted" image="compose_toolbar_picture_highlighted"/>
+                                <connections>
+                                    <action selector="picPickerClicked" destination="-1" eventType="touchUpInside" id="gRS-6D-KKj"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="GGw-tl-2Hk"/>
@@ -88,11 +105,14 @@
             <constraints>
                 <constraint firstItem="2sk-CS-lUk" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="3hY-PN-KhW"/>
                 <constraint firstAttribute="bottom" secondItem="6Yt-hV-bo6" secondAttribute="bottom" id="3tq-6Y-X8t"/>
+                <constraint firstAttribute="trailing" secondItem="KA1-0f-ykM" secondAttribute="trailing" id="9Fh-sX-bUN"/>
                 <constraint firstItem="2sk-CS-lUk" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="IEN-6l-1xx"/>
                 <constraint firstAttribute="trailing" secondItem="6Yt-hV-bo6" secondAttribute="trailing" id="UOo-Bv-uor"/>
+                <constraint firstItem="KA1-0f-ykM" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="VBq-2t-6V2"/>
                 <constraint firstItem="6Yt-hV-bo6" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="g6P-ai-K0S"/>
                 <constraint firstAttribute="bottom" secondItem="2sk-CS-lUk" secondAttribute="bottom" id="mEU-sT-wON"/>
                 <constraint firstAttribute="trailing" secondItem="2sk-CS-lUk" secondAttribute="trailing" id="sVz-SP-NFW"/>
+                <constraint firstAttribute="bottom" secondItem="KA1-0f-ykM" secondAttribute="bottom" id="tLQ-NT-egn"/>
             </constraints>
         </view>
     </objects>
