@@ -13,6 +13,12 @@ private let edgeMargin : CGFloat = 15
 
 class PicPickerCollectionView: UICollectionView {
 
+    var images: [UIImage]? {
+        didSet{
+            reloadData()
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -32,13 +38,15 @@ class PicPickerCollectionView: UICollectionView {
 
 extension PicPickerCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return (images?.count ?? 0) + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: picPickerCellId, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: picPickerCellId, for: indexPath) as! PicPickerCell
         
-        cell.backgroundColor = UIColor.red
+        let count = images?.count ?? 0
+        let image = (indexPath.item > count-1) ? nil : images?[indexPath.item]
+        cell.image = image
         
         return cell
     }

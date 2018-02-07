@@ -9,14 +9,17 @@
 import UIKit
 
 class ComposeViewController: UIViewController {
-    
+    //MARK:- UI控件
     fileprivate lazy var titleView: ComposeTitleView = ComposeTitleView()
     @IBOutlet weak var textView: ComposeTextView!
+    @IBOutlet weak var picPickerView: PicPickerCollectionView!
 
     // tool底部的约束
     @IBOutlet weak var toolBarBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var picPickerViewHeightConstraint: NSLayoutConstraint!
     
+    //MARK:- 存储属性
+    lazy var images: [UIImage] = [UIImage]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -114,7 +117,15 @@ extension ComposeViewController {
 extension ComposeViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        // 获取选择的照片
+        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
         
+        // 将照片展示到picPickerView中
+        images.append(image)
+        picPickerView.images = images
+        
+        // 推出picker
+        picker.dismiss(animated: true, completion: nil)
     }
     
 }

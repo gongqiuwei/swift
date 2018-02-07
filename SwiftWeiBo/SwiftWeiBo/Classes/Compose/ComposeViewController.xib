@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ComposeViewController" customModule="SwiftWeiBo" customModuleProvider="target">
             <connections>
+                <outlet property="picPickerView" destination="KA1-0f-ykM" id="cU9-tc-NGI"/>
                 <outlet property="picPickerViewHeightConstraint" destination="7vI-wp-GtR" id="1PE-yH-a4f"/>
                 <outlet property="textView" destination="2sk-CS-lUk" id="yb0-e2-z7o"/>
                 <outlet property="toolBarBottomConstraint" destination="3tq-6Y-X8t" id="T3S-vb-KXu"/>
@@ -32,7 +33,7 @@
                 </textView>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="KA1-0f-ykM" customClass="PicPickerCollectionView" customModule="SwiftWeiBo" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="667" width="375" height="0.0"/>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" id="7vI-wp-GtR"/>
                     </constraints>

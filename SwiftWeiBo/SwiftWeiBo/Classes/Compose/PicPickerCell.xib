@@ -25,19 +25,42 @@
                             <action selector="addPhotoClicked" destination="gTV-IL-0wX" eventType="touchUpInside" id="QoN-V1-FF9"/>
                         </connections>
                     </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JAg-2k-kDt">
+                        <rect key="frame" x="0.0" y="0.0" width="112" height="131"/>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kO7-ri-XHK">
+                        <rect key="frame" x="88" y="0.0" width="24" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="24" id="UTs-15-heK"/>
+                            <constraint firstAttribute="height" constant="24" id="WSM-4n-yRV"/>
+                        </constraints>
+                        <state key="normal" image="compose_photo_close"/>
+                    </button>
                 </subviews>
             </view>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="kO7-ri-XHK" secondAttribute="trailing" id="7Sf-fa-7KF"/>
+                <constraint firstItem="JAg-2k-kDt" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="9yf-oD-lMQ"/>
+                <constraint firstItem="kO7-ri-XHK" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Cd9-el-W1C"/>
+                <constraint firstItem="JAg-2k-kDt" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="H2Y-RJ-7xy"/>
                 <constraint firstAttribute="trailing" secondItem="hBl-dE-AKh" secondAttribute="trailing" id="LtH-Dr-1GN"/>
                 <constraint firstItem="hBl-dE-AKh" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="NjW-9f-lI9"/>
+                <constraint firstAttribute="bottom" secondItem="JAg-2k-kDt" secondAttribute="bottom" id="Sa6-XD-Drc"/>
+                <constraint firstAttribute="trailing" secondItem="JAg-2k-kDt" secondAttribute="trailing" id="dNK-HN-xaW"/>
                 <constraint firstItem="hBl-dE-AKh" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="oDa-tE-dQf"/>
                 <constraint firstAttribute="bottom" secondItem="hBl-dE-AKh" secondAttribute="bottom" id="pnW-MZ-HKy"/>
             </constraints>
             <size key="customSize" width="112" height="131"/>
+            <connections>
+                <outlet property="addBtn" destination="hBl-dE-AKh" id="lq4-Q8-xDp"/>
+                <outlet property="closeBtn" destination="kO7-ri-XHK" id="51G-2L-DMw"/>
+                <outlet property="imageView" destination="JAg-2k-kDt" id="0HO-mH-gPz"/>
+            </connections>
             <point key="canvasLocation" x="-92" y="75"/>
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="compose_photo_close" width="24" height="24"/>
         <image name="compose_pic_add" width="70" height="70"/>
         <image name="compose_pic_add_highlighted" width="70" height="70"/>
     </resources>

@@ -10,9 +10,25 @@ import UIKit
 
 class PicPickerCell: UICollectionViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
+    @IBOutlet weak var addBtn: UIButton!
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var closeBtn: UIButton!
+    
+    var image: UIImage? {
+        didSet{
+            if let image = image {
+                imageView.isHidden = false
+                imageView.image = image
+                closeBtn.isHidden = false
+                addBtn.isUserInteractionEnabled = false
+                
+            } else {
+                imageView.isHidden = true
+                imageView.image = nil
+                closeBtn.isHidden = true
+                addBtn.isUserInteractionEnabled = true
+            }
+        }
     }
 
     /// 添加照片按钮点击
