@@ -1133,3 +1133,27 @@ xcode版本：xcode8.2.1 swift版本：swift3.0
 				}）
 			}）
 			```
+			
+	- 微博发布界面
+		- 导航栏的设定
+			- SnapKit的基本使用
+			
+			```swift
+			titleLabel.snp.makeConstraints { (make) in
+				make.centerX.equalTo(self)
+				make.top.equalTo(self)
+			}
+			
+			screenNameLabel.snp.makeConstraints { (make) in
+				make.centerX.equalTo(self)
+				make.top.equalTo(self.titleLabel.snp.bottom).offset(2)
+			}
+			```
+			
+		- textView自定义
+			- 点击textView出现警告，处理方法： 从xcode菜单中：Product > Scheme > Edit Scheme
+Environment Variables 添加一栏name：OS_ACTIVITY_MODE  Value:disable
+			
+			![](Images/Snip20180207_1.png)
+				
+			- 
