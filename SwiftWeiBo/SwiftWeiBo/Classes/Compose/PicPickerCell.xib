@@ -35,6 +35,9 @@
                             <constraint firstAttribute="height" constant="24" id="WSM-4n-yRV"/>
                         </constraints>
                         <state key="normal" image="compose_photo_close"/>
+                        <connections>
+                            <action selector="closeClicked" destination="gTV-IL-0wX" eventType="touchUpInside" id="62J-Ih-QCf"/>
+                        </connections>
                     </button>
                 </subviews>
             </view>

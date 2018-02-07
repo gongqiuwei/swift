@@ -33,6 +33,14 @@ class PicPickerCell: UICollectionViewCell {
 
     /// 添加照片按钮点击
     @IBAction func addPhotoClicked() {
+        /// 通知ComposeViewController添加照片
         NotificationCenter.default.post(name: NSNotification.Name( PicPickerViewAddPhotoNotification), object: nil)
     }
+    
+    /// 删除照片点击
+    @IBAction func closeClicked() {
+        /// 通知ComposeViewController删除照片
+        NotificationCenter.default.post(name: NSNotification.Name(PicPickerViewRemovePhotoNotification), object: image)
+    }
+    
 }

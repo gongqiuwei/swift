@@ -15,6 +15,7 @@ let redirect_uri = "http://www.baidu.com"
 let accountName = "gongqiuwei@sina.com"
 let passwd = "g19870724"
 
-
-let PicPickerViewAddPhotoNotification = "PicPickerViewAddPhotoNotification" 
+//MARK:- 发布界面通知
+let PicPickerViewAddPhotoNotification = "PicPickerViewAddPhotoNotification"
+let PicPickerViewRemovePhotoNotification = "PicPickerViewRemovePhotoNotification"
 

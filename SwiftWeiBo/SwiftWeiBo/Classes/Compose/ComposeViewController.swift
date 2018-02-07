@@ -32,6 +32,7 @@ class ComposeViewController: UIViewController {
         // 添加通知
         NotificationCenter.default.addObserver(self, selector: #selector(ComposeViewController.keyboardWillChangeFrame(note:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(ComposeViewController.addPhoto), name: Notification.Name(PicPickerViewAddPhotoNotification), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ComposeViewController.removePhoto(note:)), name: NSNotification.Name(PicPickerViewRemovePhotoNotification), object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -97,23 +98,9 @@ extension ComposeViewController {
             self.view.layoutIfNeeded()
         }
     }
-    
-    /// 添加照片
-    @objc fileprivate func addPhoto() {
-        // 是否有权限
-        if !UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-            return
-        }
-        
-        // 创建选择照片
-        let ipc = UIImagePickerController()
-        ipc.sourceType = .photoLibrary
-        ipc.delegate = self
-        present(ipc, animated: true, completion: nil)
-    }
 }
 
-
+//MARK:- 照片处理
 extension ComposeViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
@@ -128,6 +115,38 @@ extension ComposeViewController: UIImagePickerControllerDelegate, UINavigationCo
         picker.dismiss(animated: true, completion: nil)
     }
     
+    /// 添加照片
+    @objc fileprivate func addPhoto() {
+        // 是否有权限
+        if !UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            return
+        }
+        
+        // 创建选择照片
+        let ipc = UIImagePickerController()
+        ipc.sourceType = .photoLibrary
+        ipc.delegate = self
+        present(ipc, animated: true, completion: nil)
+    }
+    
+    /// 删除照片
+    @objc fileprivate func removePhoto(note: Notification) {
+        // 要删除的照片
+        guard let image = note.object as? UIImage else {
+            return
+        }
+        
+        // 查找在数组中的位置
+        guard let index = images.index(of: image) else {
+            return
+        }
+        
+        // 删除
+        images.remove(at: index)
+        
+        // 刷新
+        picPickerView.images = images
+    }
 }
 
 

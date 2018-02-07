@@ -1201,4 +1201,10 @@ Environment Variables 添加一栏name：OS_ACTIVITY_MODE  Value:disable
 			- 事件监听
 			- 布局选择图片的collectionview
 			- 自定义PicPickerView继承自Collectionview
-				- 
+				- layout的设定
+				- cell的自定义
+					- 添加照片
+					- 删除照片
+				
+		
+		- 表情键盘
