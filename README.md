@@ -1161,3 +1161,37 @@ Environment Variables 添加一栏name：OS_ACTIVITY_MODE  Value:disable
 				- 进入控制器默认弹出键盘
 				- textView无内容也可以滑动
 				- textView滑动的时候，退出键盘
+				
+		- 底部toolbar
+			
+			- 布局：
+				- 向toolBar里面推入uibutton，xib会自动包裹成uibarbuttonitem类型
+				- item的间距：Flexible Space是弹簧样的自动可变的， Fixed space是固定距离的； 所以左右两边使用fixed item，中间使用 flexible item
+			
+			- 键盘的监听, 确定toolbar的位置
+				
+			```swift
+			// 添加通知
+			NotificationCenter.default.addObserver(self, selector: #selector(ComposeViewController.keyboardWillChangeFrame(note:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+			
+			// 移除通知
+			deinit {
+				NotificationCenter.default.removeObserver(self)
+			}
+			
+			/// 监听键盘frame改变的通知
+			@objc fileprivate func keyboardWillChangeFrame(note: Notification) {
+				// 获取键盘动画时间
+				let duration = note.userInfo![UIKeyboardAnimationDurationUserInfoKey] as! TimeInterval
+				
+				// 键盘的结束位置, 是NSRect类型， 不能直接强制转换成 CGRect， 会失败
+				let endFrame = (note.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+				let endY = endFrame.origin.y
+				
+				// 动画
+				toolBarBottomConstraint.constant = UIScreen.main.bounds.height - endY
+				UIView.animate(withDuration: duration) {
+					self.view.layoutIfNeeded()
+				}
+			}
+			```

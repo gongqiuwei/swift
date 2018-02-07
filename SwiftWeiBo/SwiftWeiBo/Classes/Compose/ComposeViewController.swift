@@ -9,9 +9,13 @@
 import UIKit
 
 class ComposeViewController: UIViewController {
+    
+    fileprivate lazy var titleView: ComposeTitleView = ComposeTitleView()
     @IBOutlet weak var textView: ComposeTextView!
 
-    fileprivate lazy var titleView: ComposeTitleView = ComposeTitleView()
+    // tool底部的约束
+    @IBOutlet weak var toolBarBottomConstraint: NSLayoutConstraint!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +24,9 @@ class ComposeViewController: UIViewController {
         
         // scrollview的属性，当没有内容的时候也可以滑动
         textView.alwaysBounceVertical = true
+        
+        // 添加通知
+        NotificationCenter.default.addObserver(self, selector: #selector(ComposeViewController.keyboardWillChangeFrame(note:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -32,6 +39,11 @@ class ComposeViewController: UIViewController {
         super.viewWillDisappear(animated)
         
         textView.resignFirstResponder()
+    }
+    
+    deinit {
+        // 移除通知
+        NotificationCenter.default.removeObserver(self)
     }
 }
 
@@ -51,6 +63,21 @@ extension ComposeViewController {
     
     @objc private func sendItemClicked() {
         print("sendItemClicked")
+    }
+    
+    /// 监听键盘frame改变的通知
+    @objc fileprivate func keyboardWillChangeFrame(note: Notification) {
+        // 获取键盘动画时间
+        let duration = note.userInfo![UIKeyboardAnimationDurationUserInfoKey] as! TimeInterval
+        // 键盘的结束位置, 是NSRect类型， 不能直接强制转换成 CGRect， 会失败
+        let endFrame = (note.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let endY = endFrame.origin.y
+        
+        // 动画
+        toolBarBottomConstraint.constant = UIScreen.main.bounds.height - endY
+        UIView.animate(withDuration: duration) { 
+            self.view.layoutIfNeeded()
+        }
     }
 }
 
