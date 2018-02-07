@@ -28,6 +28,7 @@ class HomeViewController: BaseViewController {
         tipLabel.textAlignment = .center
         tipLabel.frame = CGRect(x: 0, y: 10, width: UIScreen.main.bounds.width, height: 32)
         tipLabel.isHidden = true
+        // insert到navigationBar中，会被系统强制显示到navigationbarBackground上，没有高斯模糊的效果，因此使用这种方式替代
         self.navigationController?.view.insertSubview(tipLabel, belowSubview: self.navigationController!.navigationBar)
         
         return tipLabel
@@ -229,3 +230,6 @@ extension HomeViewController{
         return viewModel.cellHeight
     }
 }
+
+
+

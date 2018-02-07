@@ -1095,3 +1095,41 @@ xcode版本：xcode8.2.1 swift版本：swift3.0
 				- 加载最新数据
 				- 数据拼接 `self.viewModels = tempViewModels + self.viewModels`
 			- 集成footer
+		
+		- 刷新数据的提示label
+			- 懒加载label
+			
+			```swift
+			fileprivate lazy var tipLabel: UILabel = {
+				let tipLabel = UILabel()
+				tipLabel.backgroundColor = UIColor.orange
+				tipLabel.textColor = UIColor.white
+				tipLabel.font = UIFont.systemFont(ofSize: 13)
+				tipLabel.textAlignment = .center
+				tipLabel.frame = CGRect(x: 0, y: 10, width: UIScreen.main.bounds.width, height: 32)
+				tipLabel.isHidden = true
+				// insert到navigationBar中，会被系统强制显示到navigationbarBackground上，没有高斯模糊的效果，因此使用这种方式替代
+				self.navigationController?.view.insertSubview(tipLabel, belowSubview: self.navigationController!.navigationBar)
+				
+				return tipLabel
+			}()
+			```
+			
+			- label显示与消失动画
+
+			```swift
+			// 显示tiplabel
+			let count = viewModels.count
+			let string = count == 0 ? "没有最新的微博" : "更新了\(count)条微博"
+			self.tipLabel.text = string
+			self.tipLabel.isHidden = false
+			UIView.animate(withDuration: 1.0, animations: {
+				self.tipLabel.frame.origin.y = self.navigationController!.navigationBar.frame.maxY
+			}, completion: { (_) in
+				UIView.animate(withDuration: 1.0, delay: 1.0, options: [], animations:{
+					self.tipLabel.frame.origin.y = 10
+				}, completion: { (_) in
+					self.tipLabel.isHidden = true
+				}）
+			}）
+			```

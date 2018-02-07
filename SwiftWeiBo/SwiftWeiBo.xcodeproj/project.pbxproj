@@ -28,6 +28,10 @@
 		186E07722028013300EDAA22 /* HomeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186E07712028013300EDAA22 /* HomeViewCell.swift */; };
 		186E07742028885C00EDAA22 /* PicCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186E07732028885C00EDAA22 /* PicCollectionView.swift */; };
 		187A500E2023FB7C001D5145 /* UserAccountTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187A500D2023FB7C001D5145 /* UserAccountTool.swift */; };
+		18BBBD4D202ACD4A00E3CCA4 /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BBBD4B202ACD4A00E3CCA4 /* ComposeViewController.swift */; };
+		18BBBD4E202ACD4A00E3CCA4 /* ComposeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18BBBD4C202ACD4A00E3CCA4 /* ComposeViewController.xib */; };
+		18BBBD50202ACED300E3CCA4 /* ComposeTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BBBD4F202ACED300E3CCA4 /* ComposeTitleView.swift */; };
+		18BBBD52202AD26300E3CCA4 /* ComposeTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BBBD51202AD26300E3CCA4 /* ComposeTextView.swift */; };
 		18D5C5A52021E02B00569679 /* OAuthorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D5C5A32021E02B00569679 /* OAuthorViewController.swift */; };
 		18D5C5A62021E02B00569679 /* OAuthorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18D5C5A42021E02B00569679 /* OAuthorViewController.xib */; };
 		18D5C5A82021FEC300569679 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D5C5A72021FEC300569679 /* Common.swift */; };
@@ -87,6 +91,10 @@
 		186E07712028013300EDAA22 /* HomeViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewCell.swift; sourceTree = "<group>"; };
 		186E07732028885C00EDAA22 /* PicCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PicCollectionView.swift; sourceTree = "<group>"; };
 		187A500D2023FB7C001D5145 /* UserAccountTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAccountTool.swift; sourceTree = "<group>"; };
+		18BBBD4B202ACD4A00E3CCA4 /* ComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeViewController.swift; sourceTree = "<group>"; };
+		18BBBD4C202ACD4A00E3CCA4 /* ComposeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ComposeViewController.xib; sourceTree = "<group>"; };
+		18BBBD4F202ACED300E3CCA4 /* ComposeTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeTitleView.swift; sourceTree = "<group>"; };
+		18BBBD51202AD26300E3CCA4 /* ComposeTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeTextView.swift; sourceTree = "<group>"; };
 		18D5C5A32021E02B00569679 /* OAuthorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthorViewController.swift; sourceTree = "<group>"; };
 		18D5C5A42021E02B00569679 /* OAuthorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OAuthorViewController.xib; sourceTree = "<group>"; };
 		18D5C5A72021FEC300569679 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
@@ -185,6 +193,17 @@
 			name = HomeModel;
 			sourceTree = "<group>";
 		};
+		18BBBD4A202ACD2D00E3CCA4 /* Compose */ = {
+			isa = PBXGroup;
+			children = (
+				18BBBD4B202ACD4A00E3CCA4 /* ComposeViewController.swift */,
+				18BBBD4C202ACD4A00E3CCA4 /* ComposeViewController.xib */,
+				18BBBD4F202ACED300E3CCA4 /* ComposeTitleView.swift */,
+				18BBBD51202AD26300E3CCA4 /* ComposeTextView.swift */,
+			);
+			path = Compose;
+			sourceTree = "<group>";
+		};
 		18D5C5A22021DFFF00569679 /* OAuthor */ = {
 			isa = PBXGroup;
 			children = (
@@ -251,6 +270,7 @@
 		18FF7717201B664C00055AA8 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				18BBBD4A202ACD2D00E3CCA4 /* Compose */,
 				18FF771A201B664C00055AA8 /* Main */,
 				18FF7719201B664C00055AA8 /* Home */,
 				18FF771B201B664C00055AA8 /* Message */,
@@ -463,6 +483,7 @@
 				18FF772F201CD1BD00055AA8 /* Message.storyboard in Resources */,
 				184DAB27201E192C002E9DC8 /* VisitorView.xib in Resources */,
 				18FF772A201C35BB00055AA8 /* MainVCSettings.json in Resources */,
+				18BBBD4E202ACD4A00E3CCA4 /* ComposeViewController.xib in Resources */,
 				186E07672025DE2200EDAA22 /* WellcomeViewController.xib in Resources */,
 				18FF772D201CD17D00055AA8 /* Home.storyboard in Resources */,
 				18FF7733201CD1DC00055AA8 /* Profile.storyboard in Resources */,
@@ -543,16 +564,19 @@
 				186E076C2027481400EDAA22 /* Date+Extension.swift in Sources */,
 				184DAB3D201F653F002E9DC8 /* PopoverPresentationController.swift in Sources */,
 				186E076A2027220D00EDAA22 /* Status.swift in Sources */,
+				18BBBD50202ACED300E3CCA4 /* ComposeTitleView.swift in Sources */,
 				186E07662025DE2200EDAA22 /* WellcomeViewController.swift in Sources */,
 				18D5C5AA202209A200569679 /* UserAccount.swift in Sources */,
 				184DAB35201F035A002E9DC8 /* UIBarButtonItem-Extension.swift in Sources */,
 				18FF771E201B681800055AA8 /* MainViewController.swift in Sources */,
 				187A500E2023FB7C001D5145 /* UserAccountTool.swift in Sources */,
+				18BBBD4D202ACD4A00E3CCA4 /* ComposeViewController.swift in Sources */,
 				18FF7724201B688500055AA8 /* DiscoverViewController.swift in Sources */,
 				184DAB41202160F6002E9DC8 /* NetworkTool.swift in Sources */,
 				184DAB31201EF4D9002E9DC8 /* TitleButton.swift in Sources */,
 				184DAB3A201F091E002E9DC8 /* PopoverViewController.swift in Sources */,
 				18D5C5A52021E02B00569679 /* OAuthorViewController.swift in Sources */,
+				18BBBD52202AD26300E3CCA4 /* ComposeTextView.swift in Sources */,
 				18FF7726201B689200055AA8 /* ProfileViewController.swift in Sources */,
 				18E113E6201AB9FA00D4FC3F /* AppDelegate.swift in Sources */,
 				186E07702027EA3900EDAA22 /* StatusViewModel.swift in Sources */,

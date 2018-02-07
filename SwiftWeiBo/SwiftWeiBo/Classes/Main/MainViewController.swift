@@ -70,7 +70,11 @@ extension MainViewController {
     }
     
     @objc fileprivate func composeBtnClicked(sender: UIButton) {
-        print("---composeBtnClicked--\(sender)-")
+        
+        let composeVc = ComposeViewController()
+        let composeNav = UINavigationController(rootViewController: composeVc)
+        present(composeNav, animated: true, completion: nil)
+        
     }
 }
 
