@@ -20,6 +20,19 @@ class HomeViewController: BaseViewController {
         self?.titleButton.isSelected = isPresented
     })
     
+    fileprivate lazy var tipLabel: UILabel = {
+        let tipLabel = UILabel()
+        tipLabel.backgroundColor = UIColor.orange
+        tipLabel.textColor = UIColor.white
+        tipLabel.font = UIFont.systemFont(ofSize: 13)
+        tipLabel.textAlignment = .center
+        tipLabel.frame = CGRect(x: 0, y: 10, width: UIScreen.main.bounds.width, height: 32)
+        tipLabel.isHidden = true
+        self.navigationController?.view.insertSubview(tipLabel, belowSubview: self.navigationController!.navigationBar)
+        
+        return tipLabel
+    }()
+    
 //    fileprivate lazy var statuses:[Status] = [Status]()
     fileprivate lazy var viewModels:[StatusViewModel] = [StatusViewModel]()
     
@@ -48,6 +61,7 @@ class HomeViewController: BaseViewController {
 
 //MARK:- UI设定
 extension HomeViewController {
+    
     /// 设置刷新控件
     fileprivate func setupRefresh() {
         let header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(HomeViewController.loadNewStatus))
@@ -56,7 +70,7 @@ extension HomeViewController {
         header?.setTitle("加载中...", for: .refreshing)
         tableView.mj_header = header
         
-        let footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(HomeViewController.loadMoreStatus))
+        let footer = MJRefreshBackNormalFooter(refreshingTarget: self, refreshingAction: #selector(HomeViewController.loadMoreStatus))
         tableView.mj_footer = footer;
         
         tableView.mj_header.beginRefreshing()
@@ -174,6 +188,21 @@ extension HomeViewController {
             
             self.tableView.mj_header.endRefreshing()
             self.tableView.mj_footer.endRefreshing()
+            
+            // 显示tiplabel
+            let count = viewModels.count
+            let string = count == 0 ? "没有最新的微博" : "更新了\(count)条微博"
+            self.tipLabel.text = string
+            self.tipLabel.isHidden = false
+            UIView.animate(withDuration: 1.0, animations: { 
+                self.tipLabel.frame.origin.y = self.navigationController!.navigationBar.frame.maxY
+            }, completion: { (_) in
+                UIView.animate(withDuration: 1.0, delay: 1.0, options: [], animations: { 
+                    self.tipLabel.frame.origin.y = 10
+                }, completion: { (_) in
+                    self.tipLabel.isHidden = true
+                })
+            })
         }
     }
 }
