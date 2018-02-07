@@ -11,7 +11,7 @@ import SnapKit
 
 class ComposeTextView: UITextView {
     
-    fileprivate lazy var placeHolderLabel: UILabel = UILabel()
+    lazy var placeHolderLabel: UILabel = UILabel()
     
     // 从xib或者storyboard文件中创建
     required init?(coder aDecoder: NSCoder) {

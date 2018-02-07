@@ -1156,4 +1156,8 @@ Environment Variables 添加一栏name：OS_ACTIVITY_MODE  Value:disable
 			
 			![](Images/Snip20180207_1.png)
 				
-			- 
+			- 细节调整
+				- textView输入文字是隐藏placeholderLabel
+				- 进入控制器默认弹出键盘
+				- textView无内容也可以滑动
+				- textView滑动的时候，退出键盘
