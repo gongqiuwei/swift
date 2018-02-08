@@ -15,6 +15,7 @@ class EmoticonViewController: UIViewController {
     //MARK:- 懒加载属性
     fileprivate lazy var collectionView : UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: EmoticonCollectionLayout())
     fileprivate lazy var toolBar: UIToolbar = UIToolbar()
+    fileprivate lazy var emoticonManager: EmoticonManager = EmoticonManager()
     
     //MARK:- 系统函数
     override func viewDidLoad() {
@@ -22,7 +23,7 @@ class EmoticonViewController: UIViewController {
         
         setupUI()
         
-        testPrintAllEmoticons()
+//        testPrintAllEmoticons()
     }
     
     /// 测试打印所有的表情模型
@@ -80,7 +81,7 @@ extension EmoticonViewController {
         collectionView.showsVerticalScrollIndicator = false
         
         collectionView.dataSource = self
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: EmoticonCellId)
+        collectionView.register(EmoticonCell.self, forCellWithReuseIdentifier: EmoticonCellId)
     }
     
     /// 设置底部的toolBar
@@ -111,13 +112,25 @@ extension EmoticonViewController {
 
 
 extension EmoticonViewController: UICollectionViewDataSource {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return emoticonManager.packages.count
+    }
+    
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 200
+        let package = emoticonManager.packages[section]
+        return package.emoticons.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmoticonCellId, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmoticonCellId, for: indexPath) as! EmoticonCell
+        
         cell.backgroundColor = indexPath.item%2==0 ? UIColor.red : UIColor.blue
+        let package = emoticonManager.packages[indexPath.section]
+        let emoticon = package.emoticons[indexPath.item]
+        cell.emoticon = emoticon
+        
         return cell
     }
 }
