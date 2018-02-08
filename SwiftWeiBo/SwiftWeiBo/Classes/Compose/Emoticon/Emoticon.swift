@@ -49,6 +49,8 @@ class Emoticon: NSObject {
     
     var pngPath: String?    // 图片全路径
     var emojiCode: String?  // emoji对用的字符
+    var isRemove: Bool = false  // 是否是删除键
+    var isEmpty: Bool = false   // 是否是空白表情
     
     //MARK:- 构造函数
     init(dict: [String:String]) {
@@ -57,6 +59,13 @@ class Emoticon: NSObject {
         setValuesForKeys(dict)
     }
     override func setValue(_ value: Any?, forUndefinedKey key: String) {}
+    
+    init(isRemove: Bool) {
+        self.isRemove = isRemove
+    }
+    init(isEmpty: Bool) {
+        self.isEmpty = isEmpty
+    }
     
     // 模型的自定义打印
     // 打印方法 print(String(reflecting:emoticon))

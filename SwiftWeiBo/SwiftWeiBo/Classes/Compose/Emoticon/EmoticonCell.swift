@@ -19,6 +19,10 @@ class EmoticonCell: UICollectionViewCell {
             
             emoticonBtn.setImage(UIImage(named: emoticon.pngPath ?? ""), for: .normal)
             emoticonBtn.setTitle(emoticon.emojiCode, for: .normal)
+            
+            if emoticon.isRemove {
+                emoticonBtn.setImage(UIImage(named: "compose_emotion_delete"), for: .normal)
+            }
         }
     }
     

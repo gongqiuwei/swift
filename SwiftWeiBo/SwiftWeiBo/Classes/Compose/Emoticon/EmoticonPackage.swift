@@ -19,6 +19,7 @@ class EmoticonPackage: NSObject {
         
         // 值判断， ""为最近表情
         if id == "" {
+            addEmptyEmoticons(isRecent: true)
             return
         }
         
@@ -36,13 +37,39 @@ class EmoticonPackage: NSObject {
         }
         
         // 遍历，转换成Emoticon模型
+        var index = 0
         for var dict in array {
             if let png = dict["png"] { // 如果png有值，那么需要拼接上文件名
                 dict["png"] = "\(id)/\(png)"
             }
             
             emoticons.append(Emoticon(dict: dict))
+            index += 1
+            
+            if index == 20 {
+                emoticons.append(Emoticon(isRemove: true))
+                index = 0
+            }
         }
         
+        addEmptyEmoticons(isRecent: false)
+    }
+    
+    /// 添加空白表情
+    private func addEmptyEmoticons(isRecent: Bool) {
+        // 需要保证每页都有21个表情， 为此插入空白表情
+        // count表示多余了多少个表情
+        let count = emoticons.count % 21
+        
+        if count == 0 && !isRecent{ // 不需要插入空白表情
+            return
+        }
+        
+        // 第21的位置留给delete
+        for _ in count..<20 {
+            emoticons.append(Emoticon(isEmpty: true))
+        }
+        // 添加删除
+        emoticons.append(Emoticon(isRemove: true))
     }
 }

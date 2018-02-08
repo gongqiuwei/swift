@@ -106,7 +106,8 @@ extension EmoticonViewController {
     }
     
     @objc private func toolBarItemClicked(item: UIBarButtonItem) {
-        print("tag:\(item.tag)")
+        let indexPath = IndexPath(item: 0, section: item.tag)
+        collectionView.scrollToItem(at: indexPath, at: .left, animated: true)
     }
 }
 

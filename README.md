@@ -1248,3 +1248,7 @@ Environment Variables 添加一栏name：OS_ACTIVITY_MODE  Value:disable
 					```
 					
 					- 属性的处理1：png路径， 转换成全路径
+					- 属性处理2: code转换成可以展示的emoji字符
+				
+				- 删除键：
+				- 空白表情：使得每一页都是21个表情按键
