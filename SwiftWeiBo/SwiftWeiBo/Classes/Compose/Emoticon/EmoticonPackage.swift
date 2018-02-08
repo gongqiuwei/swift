@@ -36,7 +36,11 @@ class EmoticonPackage: NSObject {
         }
         
         // 遍历，转换成Emoticon模型
-        for dict in array {
+        for var dict in array {
+            if let png = dict["png"] { // 如果png有值，那么需要拼接上文件名
+                dict["png"] = "\(id)/\(png)"
+            }
+            
             emoticons.append(Emoticon(dict: dict))
         }
         

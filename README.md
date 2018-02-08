@@ -1247,6 +1247,4 @@ Environment Variables 添加一栏name：OS_ACTIVITY_MODE  Value:disable
     				}
 					```
 					
-				
-				
-				
+					- 属性的处理1：png路径， 转换成全路径
