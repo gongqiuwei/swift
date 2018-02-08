@@ -21,6 +21,18 @@ class EmoticonViewController: UIViewController {
         super.viewDidLoad()
         
         setupUI()
+        
+        testPrintAllEmoticons()
+    }
+    
+    /// 测试打印所有的表情模型
+    private func testPrintAllEmoticons() {
+        let manager = EmoticonManager()
+        for package in manager.packages {
+            for emoticon in package.emoticons {
+                print(String(reflecting: emoticon))
+            }
+        }
     }
 }
 

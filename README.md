@@ -1223,3 +1223,30 @@ Environment Variables 添加一栏name：OS_ACTIVITY_MODE  Value:disable
 				- VFL布局子控件，以后可以抽取一个模块 `addSubViews()`
 				- collectionView设定 `prepareForCollectionView()` 以及 自定义layout`EmoticonCollectionLayout`
 				- toolbar设定 `prepareForToolBar()`
+
+			
+			- 表情数据的管理
+				
+				- 模型建立
+				
+				![](Images/Snip20180208_2.png)
+				
+				- EmoticonManager类(工具类)，管理所有的表情包
+				- EmoticonPackage类，表情包，相当于一个文件
+					- 内嵌bundle文件的加载
+					- 加载info.plist得到的是OC中的NSArray，而swift中的Array无法这样得到，但是NSArray可以无缝转换到Array
+				
+				- Emoticon类，单个表情模型
+					- swift中模型的debug自定义
+					
+					```swift
+					// 模型的自定义打印
+    				// 打印方法 print(String(reflecting:emoticon))
+    				override var debugDescription: String {
+        				return dictionaryWithValues(forKeys: ["code", "png", "chs"]).debugDescription
+    				}
+					```
+					
+				
+				
+				
