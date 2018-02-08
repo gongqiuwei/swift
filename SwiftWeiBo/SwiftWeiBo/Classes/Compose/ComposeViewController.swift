@@ -19,7 +19,8 @@ class ComposeViewController: UIViewController {
     @IBOutlet weak var picPickerViewHeightConstraint: NSLayoutConstraint!
     
     //MARK:- 存储属性
-    lazy var images: [UIImage] = [UIImage]()
+    fileprivate lazy var images: [UIImage] = [UIImage]()
+    fileprivate lazy var emoticonVc : EmoticonViewController = EmoticonViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,6 +98,14 @@ extension ComposeViewController {
         UIView.animate(withDuration: 0.5) { 
             self.view.layoutIfNeeded()
         }
+    }
+    
+    /// 表情点击
+    @IBAction func emoticonClicked(){
+        // 切换键盘
+        textView.resignFirstResponder()
+        textView.inputView = emoticonVc.view
+        textView.becomeFirstResponder()
     }
 }
 

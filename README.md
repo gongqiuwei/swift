@@ -1208,3 +1208,18 @@ Environment Variables 添加一栏name：OS_ACTIVITY_MODE  Value:disable
 				
 		
 		- 表情键盘
+			- 键盘：textView.inputView = nil就是普通键盘， textView.input = UIView()就是自定义键盘
+			- 键盘切换：
+			
+			```swift
+			textView.resignFirstResponder() // 先退出键盘
+			textView.inputView = UIView() // 设置键盘
+			textView.becomeFirstResponder() // 弹出键盘
+			```
+			
+			- 键盘的布局
+				- 使用vc进行管理
+				- 键盘有如果不设置值，inputView键盘有默认的高度
+				- VFL布局子控件，以后可以抽取一个模块 `addSubViews()`
+				- collectionView设定 `prepareForCollectionView()` 以及 自定义layout`EmoticonCollectionLayout`
+				- toolbar设定 `prepareForToolBar()`
