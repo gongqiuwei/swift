@@ -56,7 +56,7 @@ class ComposeViewController: UIViewController {
     }
     
     // 表情插入
-    private func insertEmoticonToTextView(emoticon: Emoticon) {
+    fileprivate func insertEmoticonToTextView(emoticon: Emoticon) {
         // 空白表情
         if emoticon.isEmpty {
             return
@@ -81,11 +81,13 @@ class ComposeViewController: UIViewController {
         let attrM = NSMutableAttributedString(attributedString: textView.attributedText)
         
         // 2.将表情转化为attributedString
-        let attachment = NSTextAttachment()
+        let attachment = EmoticonTextAttachment()
         // 2.1.绑定image
         attachment.image = UIImage(contentsOfFile: emoticon.pngPath!)
         // 2.2.设置尺寸
         let font = textView.font!
+        // 2.3.绑定Attachment对应的chs文字
+        attachment.chs = emoticon.chs
         attachment.bounds = CGRect(x: 0, y: -4, width: font.lineHeight, height: font.lineHeight)
         let imageAttr = NSAttributedString(attachment: attachment)
         
@@ -101,6 +103,29 @@ class ComposeViewController: UIViewController {
         textView.font = font
         // 5.2.在中间插入表情，完成后光标会跳转到最后, 重新设置selectedRange
         textView.selectedRange = NSRange(location: range.location+1, length: 0)
+    }
+    
+    fileprivate func getEmoticonTextForTextView() -> String{
+        
+        // 1.获取属性字符串
+        let attrMStr = NSMutableAttributedString(attributedString: textView.attributedText)
+        
+        let range = NSRange(location: 0, length: attrMStr.length)
+        attrMStr.enumerateAttributes(in: range, options: [], using: { (dict, range, _) in
+            // 打印字典，查看普通文字和图片属性字符串的区别
+            // 图片属性字符串有："NSAttachment": <NSTextAttachment: 0x6000002acd80>
+            // range：当前字符串占据的位置
+            // print(dict)
+            
+            if let attach = dict["NSAttachment"] as? EmoticonTextAttachment {
+                // 需要将输入的NSTextAttachment换为对应 emoticon.chs
+                // 系统的NSTextAttachment无法满足需求，因此在可以自定义类继承自NSTextAttachment
+                // 在图文输入的时候，用自定义的Attachment替换系统的，并且绑定属性，在这里获取
+                attrMStr.replaceCharacters(in: range, with: attach.chs!)
+            }
+        })
+        
+        return attrMStr.string
     }
 }
 
@@ -120,7 +145,7 @@ extension ComposeViewController {
     }
     
     @objc private func sendItemClicked() {
-        print("sendItemClicked")
+        print(getEmoticonTextForTextView())
     }
     
     /// 监听键盘frame改变的通知

@@ -50,6 +50,7 @@
 		18E113FB201AB9FA00D4FC3F /* SwiftWeiBoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E113FA201AB9FA00D4FC3F /* SwiftWeiBoTests.swift */; };
 		18E11406201AB9FA00D4FC3F /* SwiftWeiBoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E11405201AB9FA00D4FC3F /* SwiftWeiBoUITests.swift */; };
 		18E7764A202C8F65004BE4E2 /* EmoticonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E77649202C8F65004BE4E2 /* EmoticonCell.swift */; };
+		18E7764C202D6748004BE4E2 /* EmoticonTextAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E7764B202D6748004BE4E2 /* EmoticonTextAttachment.swift */; };
 		18FF771E201B681800055AA8 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FF771D201B681800055AA8 /* MainViewController.swift */; };
 		18FF7720201B687000055AA8 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FF771F201B687000055AA8 /* HomeViewController.swift */; };
 		18FF7724201B688500055AA8 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FF7723201B688500055AA8 /* DiscoverViewController.swift */; };
@@ -128,6 +129,7 @@
 		18E11405201AB9FA00D4FC3F /* SwiftWeiBoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftWeiBoUITests.swift; sourceTree = "<group>"; };
 		18E11407201AB9FA00D4FC3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18E77649202C8F65004BE4E2 /* EmoticonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmoticonCell.swift; sourceTree = "<group>"; };
+		18E7764B202D6748004BE4E2 /* EmoticonTextAttachment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmoticonTextAttachment.swift; sourceTree = "<group>"; };
 		18FF771D201B681800055AA8 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		18FF771F201B687000055AA8 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		18FF7723201B688500055AA8 /* DiscoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 				1872658D202C30BB00C48128 /* EmoticonPackage.swift */,
 				1872658F202C30FE00C48128 /* Emoticon.swift */,
 				18E77649202C8F65004BE4E2 /* EmoticonCell.swift */,
+				18E7764B202D6748004BE4E2 /* EmoticonTextAttachment.swift */,
 			);
 			path = Emoticon;
 			sourceTree = "<group>";
@@ -609,6 +612,7 @@
 				186E076C2027481400EDAA22 /* Date+Extension.swift in Sources */,
 				184DAB3D201F653F002E9DC8 /* PopoverPresentationController.swift in Sources */,
 				18E7764A202C8F65004BE4E2 /* EmoticonCell.swift in Sources */,
+				18E7764C202D6748004BE4E2 /* EmoticonTextAttachment.swift in Sources */,
 				18C47BA4202B02F7008D16E2 /* PicPickerCollectionView.swift in Sources */,
 				18C47BA7202B05EF008D16E2 /* PicPickerCell.swift in Sources */,
 				186E076A2027220D00EDAA22 /* Status.swift in Sources */,
