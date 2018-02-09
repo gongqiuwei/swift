@@ -1254,3 +1254,35 @@ Environment Variables 添加一栏name：OS_ACTIVITY_MODE  Value:disable
 				- 空白表情：使得每一页都是21个表情按键
 				- 记录最近点击的表情，最多20个
 				- 删除以及emoji表情插入到textView中
+			
+			- textView中图文混排的实现
+				- NSAttributedString，NSTextAttachment 实现图文混排
+				
+			```swift
+			// 1.获取当前textView的attributedString
+        	let attrM = NSMutableAttributedString(attributedString: textView.attributedText)
+     		   
+        	// 2.将表情转化为attributedString
+        	let attachment = NSTextAttachment()
+        	// 2.1.绑定image
+        	attachment.image = UIImage(contentsOfFile: emoticon.pngPath!)
+        	// 2.2.设置尺寸
+        	let font = textView.font!
+        	attachment.bounds = CGRect(x: 0, y: -4, width: font.lineHeight, height: font.lineHeight)
+        	let imageAttr = NSAttributedString(attachment: attachment)
+     		   
+        	// 3.在attrM的某个位置插入imageAttr
+        	let range = textView.selectedRange
+        	attrM.replaceCharacters(in: range, with: imageAttr)
+     		   
+        	// 4.设置textView的attributedText
+        	textView.attributedText = attrM
+        	
+        	// 5.小bug修复
+        	// 5.1.输入表情后再输入其他会变小，也就是textView设置的font失效
+        	textView.font = font
+        	// 5.2.在中间插入表情，完成后光标会跳转到最后, 重新设置selectedRange
+        	textView.selectedRange = NSRange(location: range.location+1, length: 0)
+			```
+			
+			- 获取图文混排后上传到服务器的文字
