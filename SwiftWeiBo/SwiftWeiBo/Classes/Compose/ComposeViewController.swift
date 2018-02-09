@@ -21,12 +21,15 @@ class ComposeViewController: UIViewController {
     //MARK:- 存储属性
     fileprivate lazy var images: [UIImage] = [UIImage]()
     fileprivate lazy var emoticonVc : EmoticonViewController = EmoticonViewController { [weak self] (emoticon) in
-        self?.insertEmoticonToTextView(emoticon: emoticon)
+//        self?.insertEmoticonToTextView(emoticon: emoticon)
+        self?.textView.insertEmoticon(emoticon: emoticon)
+        // 当textView输入的第一个是表情时，不会调用代理方法，自己手动调用
+        self?.textViewDidChange(self!.textView)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupNavItem()
         
         // scrollview的属性，当没有内容的时候也可以滑动
@@ -55,7 +58,7 @@ class ComposeViewController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
-    // 表情插入
+    /// 向textView插入表情，可以抽取到textView分类中进行解耦
     fileprivate func insertEmoticonToTextView(emoticon: Emoticon) {
         // 空白表情
         if emoticon.isEmpty {
@@ -105,6 +108,7 @@ class ComposeViewController: UIViewController {
         textView.selectedRange = NSRange(location: range.location+1, length: 0)
     }
     
+    /// 从textView中获取需要的图文混排后的字符串，同样可以抽取分类方法
     fileprivate func getEmoticonTextForTextView() -> String{
         
         // 1.获取属性字符串
@@ -145,7 +149,8 @@ extension ComposeViewController {
     }
     
     @objc private func sendItemClicked() {
-        print(getEmoticonTextForTextView())
+        // print(getEmoticonTextForTextView())
+        print(textView.getEmoticonString())
     }
     
     /// 监听键盘frame改变的通知
