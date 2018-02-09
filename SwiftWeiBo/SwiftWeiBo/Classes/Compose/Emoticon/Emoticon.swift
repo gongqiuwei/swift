@@ -11,7 +11,6 @@ import UIKit
 class Emoticon: NSObject {
 
     //MARK:- 属性
-    
     var code: String?{       // emoji的code
         didSet{
             guard let code = code else {

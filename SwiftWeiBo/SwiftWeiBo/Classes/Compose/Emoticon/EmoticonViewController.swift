@@ -12,10 +12,26 @@ private let EmoticonCellId = "EmoticonCellId"
 
 class EmoticonViewController: UIViewController {
 
+    var emoticonCallBack: (_ emoticon: Emoticon) -> ()
+    
     //MARK:- 懒加载属性
     fileprivate lazy var collectionView : UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: EmoticonCollectionLayout())
     fileprivate lazy var toolBar: UIToolbar = UIToolbar()
     fileprivate lazy var emoticonManager: EmoticonManager = EmoticonManager()
+    
+    //MARK:- 构造函数
+    // @escaping 逃逸闭包，表示这个闭包不是立刻执行的，可能会造成循环引用
+    init(emoticonCallBack: @escaping (_ emoticon: Emoticon)->()) {
+        
+        // 初始化之前赋值，那么属性就不必声明为Optional
+        self.emoticonCallBack = emoticonCallBack
+        
+        // UIViewController中，init重写必须调用这个方法，否则报错，可以在头文件中查看
+        super.init(nibName: nil, bundle: nil)
+    }
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     //MARK:- 系统函数
     override func viewDidLoad() {
@@ -52,7 +68,7 @@ extension EmoticonViewController {
         // 添加子控件
         view.addSubview(collectionView)
         view.addSubview(toolBar)
-        collectionView.backgroundColor = UIColor.purple
+        collectionView.backgroundColor = UIColor.white
         toolBar.backgroundColor = UIColor.darkGray
         
         // 布局(使用VFL布局)
@@ -81,6 +97,7 @@ extension EmoticonViewController {
         collectionView.showsVerticalScrollIndicator = false
         
         collectionView.dataSource = self
+        collectionView.delegate = self
         collectionView.register(EmoticonCell.self, forCellWithReuseIdentifier: EmoticonCellId)
     }
     
@@ -112,7 +129,7 @@ extension EmoticonViewController {
 }
 
 
-extension EmoticonViewController: UICollectionViewDataSource {
+extension EmoticonViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return emoticonManager.packages.count
@@ -127,12 +144,48 @@ extension EmoticonViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmoticonCellId, for: indexPath) as! EmoticonCell
         
-        cell.backgroundColor = indexPath.item%2==0 ? UIColor.red : UIColor.blue
         let package = emoticonManager.packages[indexPath.section]
         let emoticon = package.emoticons[indexPath.item]
         cell.emoticon = emoticon
         
+        // cell.backgroundColor = indexPath.item%2==0 ? UIColor.red : UIColor.blue
+        
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let package = emoticonManager.packages[indexPath.section]
+        let emoticon = package.emoticons[indexPath.item]
+        
+        // 插入到最近表情分组中
+        insertToRecentEmoticon(emoticon: emoticon)
+        
+        // 通知外部
+        emoticonCallBack(emoticon)
+    }
+    
+    private func insertToRecentEmoticon(emoticon: Emoticon) {
+        // 判断是否为空白或者删除
+        if emoticon.isEmpty || emoticon.isRemove {
+            return
+        }
+        
+        // 查找最近是否使用了这个表情
+        let recentPackage = emoticonManager.packages.first!
+        if recentPackage.emoticons.contains(emoticon) {
+        
+        let index = recentPackage.emoticons.index(of: emoticon)!
+            recentPackage.emoticons.remove(at: index)
+//            print("-contains--\(index)")
+//            print(String(reflecting: emoticon))
+        } else {
+            recentPackage.emoticons.remove(at: 19)
+//            print("-not-contains--")
+        }
+        recentPackage.emoticons.insert(emoticon, at: 0)
+        
+        // 别忘记刷新collectionview，不然界面可能会乱
+        collectionView.reloadSections([0])
     }
 }
 

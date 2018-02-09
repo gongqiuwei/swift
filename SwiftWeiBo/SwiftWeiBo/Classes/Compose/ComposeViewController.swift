@@ -20,7 +20,9 @@ class ComposeViewController: UIViewController {
     
     //MARK:- 存储属性
     fileprivate lazy var images: [UIImage] = [UIImage]()
-    fileprivate lazy var emoticonVc : EmoticonViewController = EmoticonViewController()
+    fileprivate lazy var emoticonVc : EmoticonViewController = EmoticonViewController { [weak self] (emoticon) in
+        self?.insertEmoticonToTextView(emoticon: emoticon)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +53,29 @@ class ComposeViewController: UIViewController {
     deinit {
         // 移除通知
         NotificationCenter.default.removeObserver(self)
+    }
+    
+    // 表情插入
+    private func insertEmoticonToTextView(emoticon: Emoticon) {
+        // 空白表情
+        if emoticon.isEmpty {
+            return
+        }
+        
+        // 删除表情
+        if emoticon.isRemove {
+            textView.deleteBackward()
+            return
+        }
+        
+        // emoji表情
+        if emoticon.emojiCode != nil {
+            let textRange = textView.selectedTextRange!
+            textView.replace(textRange, withText: emoticon.emojiCode!)
+            
+            return
+        }
+        
     }
 }
 
@@ -105,6 +130,13 @@ extension ComposeViewController {
         // 切换键盘
         textView.resignFirstResponder()
         textView.inputView = emoticonVc.view
+        textView.becomeFirstResponder()
+    }
+    
+    @IBAction private func defaultKeyboardClicked() {
+        // 切换键盘
+        textView.resignFirstResponder()
+        textView.inputView = nil
         textView.becomeFirstResponder()
     }
 }

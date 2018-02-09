@@ -1252,3 +1252,5 @@ Environment Variables 添加一栏name：OS_ACTIVITY_MODE  Value:disable
 				
 				- 删除键：
 				- 空白表情：使得每一页都是21个表情按键
+				- 记录最近点击的表情，最多20个
+				- 删除以及emoji表情插入到textView中

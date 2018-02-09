@@ -99,6 +99,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="compose_keyboardbutton_background"/>
                                 <state key="highlighted" image="compose_keyboardbutton_background_highlighted"/>
+                                <connections>
+                                    <action selector="defaultKeyboardClicked" destination="-1" eventType="touchUpInside" id="Mfc-i2-t1P"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                         <barButtonItem width="20" style="plain" systemItem="fixedSpace" id="jHQ-3L-bM7"/>
