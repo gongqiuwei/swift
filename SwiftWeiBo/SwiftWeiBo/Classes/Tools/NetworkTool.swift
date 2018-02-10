@@ -112,4 +112,37 @@ extension NetworkTool{
         }
         
     }
+    
+    /// 发送文字微博
+    func sendStatus(statusText: String, isSuccess: @escaping (Bool)->()) {
+        // 接口sina不在提供了，无法发微博了/(ㄒoㄒ)/~~
+        let urlStr = "https://api.weibo.com/2/statuses/update.json"
+        let params = ["access_token" : (UserAccountTool.shareInstance.account?.access_token)!, "status" : statusText]
+        
+        request(withType: .post, urlString: urlStr, parameters: params) { (result, error) in
+            if result != nil {
+                isSuccess(true)
+            } else {
+                isSuccess(false)
+            }
+        }
+    }
+    
+    /// 发送图片微博
+    func sendStatus(statusText: String, image: UIImage, isSuccess: @escaping (Bool)->()) {
+        let urlStr = "https://api.weibo.com/2/statuses/upload.json"
+        let params = ["access_token" : (UserAccountTool.shareInstance.account?.access_token)!, "status" : statusText]
+        
+        post(urlStr, parameters: params, constructingBodyWith: { (formData) in
+            
+            if let imageData = UIImageJPEGRepresentation(image, 0.5) {
+                formData.appendPart(withFileData: imageData, name: "pic", fileName: "111.png", mimeType: "image/jpeg")
+            }
+            
+        }, progress: nil, success: { (_, _) in
+            isSuccess(true)
+        }) { (_, error: Error) in
+            isSuccess(false)
+        }
+    }
 }

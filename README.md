@@ -1308,3 +1308,7 @@ Environment Variables 添加一栏name：OS_ACTIVITY_MODE  Value:disable
 			
 			print(attrMStr.string)
 			```
+			
+	- photoBrowser 
+		- 使用通知，通知HomeViewController弹出photoBrowser
+		- 基本布局

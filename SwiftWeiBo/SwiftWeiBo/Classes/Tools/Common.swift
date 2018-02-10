@@ -19,3 +19,9 @@ let passwd = "g19870724"
 let PicPickerViewAddPhotoNotification = "PicPickerViewAddPhotoNotification"
 let PicPickerViewRemovePhotoNotification = "PicPickerViewRemovePhotoNotification"
 
+//MARK:- PhotoBrowser通知
+let PhotoBrowserShouldShowNotification = "PhotoBrowserShouldShowNotification"
+let PhotoBrowserIndexKey = "PhotoBrowserIndexKey"
+let PhotoBrowserUrlKey = "PhotoBrowserUrlKey"
+
+

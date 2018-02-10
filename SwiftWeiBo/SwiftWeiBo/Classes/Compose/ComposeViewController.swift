@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class ComposeViewController: UIViewController {
     //MARK:- UI控件
@@ -149,21 +150,46 @@ extension ComposeViewController {
     }
     
     @objc private func sendItemClicked() {
-        // print(getEmoticonTextForTextView())
-        print(textView.getEmoticonString())
+        
+        textView.resignFirstResponder()
+        
+        let statusText = textView.getEmoticonString()
+        let finishedCallBack = { (isSuccess: Bool) in
+                if !isSuccess {
+                    SVProgressHUD.showError(withStatus: "发送微博失败")
+                } else {
+                    SVProgressHUD.showSuccess(withStatus: "发送微博成功")
+                    self.dismiss(animated: true, completion: nil)
+                }
+        }
+        
+        if let image = images.first {
+            
+            NetworkTool.shareInstance.sendStatus(statusText: statusText, image: image, isSuccess: finishedCallBack)
+            
+        } else {
+            
+            NetworkTool.shareInstance.sendStatus(statusText: statusText, isSuccess: finishedCallBack)
+        }
+        
     }
     
     /// 监听键盘frame改变的通知
     @objc fileprivate func keyboardWillChangeFrame(note: Notification) {
+//        print(note.userInfo!)
         // 获取键盘动画时间
         let duration = note.userInfo![UIKeyboardAnimationDurationUserInfoKey] as! TimeInterval
         // 键盘的结束位置, 是NSRect类型， 不能直接强制转换成 CGRect， 会失败
         let endFrame = (note.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         let endY = endFrame.origin.y
         
+        // 动画曲线选项（让toolbar和键盘动画更贴近）(等级貌似等于7)
+        let curve = (note.userInfo![UIKeyboardAnimationCurveUserInfoKey] as! NSNumber).intValue
+        
         // 动画
         toolBarBottomConstraint.constant = UIScreen.main.bounds.height - endY
-        UIView.animate(withDuration: duration) { 
+        UIView.animate(withDuration: duration) {
+            UIView.setAnimationCurve(UIViewAnimationCurve(rawValue: curve)!)
             self.view.layoutIfNeeded()
         }
     }

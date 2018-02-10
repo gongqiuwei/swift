@@ -20,10 +20,11 @@ class PicCollectionView: UICollectionView {
         super.awakeFromNib()
         
         dataSource = self
+        delegate = self
     }
 }
 
-extension PicCollectionView: UICollectionViewDataSource {
+extension PicCollectionView: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return picUrls.count
     }
@@ -34,6 +35,13 @@ extension PicCollectionView: UICollectionViewDataSource {
         cell.imageUrl = picUrls[indexPath.item]
         
         return cell
+    }
+    
+    /// 点击了图片的某个cell，通知HomeViewController
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        // 发送通知
+        NotificationCenter.default.post(name: Notification.Name(PhotoBrowserShouldShowNotification), object: nil, userInfo: [PhotoBrowserIndexKey: indexPath, PhotoBrowserUrlKey: picUrls])
     }
 }
 

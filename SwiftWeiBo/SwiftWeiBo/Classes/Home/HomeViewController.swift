@@ -57,6 +57,9 @@ class HomeViewController: BaseViewController {
         tableView.estimatedRowHeight = 200
         
         setupRefresh()
+        
+        // 监听通知
+        NotificationCenter.default.addObserver(self, selector: #selector(HomeViewController.showPhotoBrowser(note:)), name: Notification.Name(PhotoBrowserShouldShowNotification), object: nil)
     }
 }
 
@@ -108,6 +111,18 @@ extension HomeViewController {
         popover.transitioningDelegate = popoverAnimator
         
         present(popover, animated: true, completion: nil)
+    }
+    
+    @objc fileprivate func showPhotoBrowser(note: Notification) {
+        guard let userinfo = note.userInfo as? [String: Any] else {
+            return
+        }
+        let picUrls = userinfo[PhotoBrowserUrlKey] as! [URL]
+        let indexPath = userinfo[PhotoBrowserIndexKey] as! IndexPath
+        
+        // 弹出photoBrowser控制器
+        let browser = PhotoBrowserController(picUrls: picUrls, indexPath: indexPath)
+        present(browser, animated: true, completion: nil)
     }
 }
 
