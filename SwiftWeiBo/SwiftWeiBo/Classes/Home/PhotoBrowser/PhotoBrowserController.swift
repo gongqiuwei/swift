@@ -30,7 +30,7 @@ class PhotoBrowserController: UIViewController {
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.dataSource = self
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: PhotoBrowserCellId)
+        collectionView.register(PhotoBrowserCell.self, forCellWithReuseIdentifier: PhotoBrowserCellId)
         
         return collectionView
     }()
@@ -109,9 +109,9 @@ extension PhotoBrowserController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoBrowserCellId, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoBrowserCellId, for: indexPath) as! PhotoBrowserCell
         
-        cell.backgroundColor = indexPath.item%2==0 ? UIColor.orange : UIColor.blue
+        cell.picUrl = picUrls[indexPath.item]
         
         return cell
     }

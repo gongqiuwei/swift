@@ -61,6 +61,10 @@ class HomeViewController: BaseViewController {
         // 监听通知
         NotificationCenter.default.addObserver(self, selector: #selector(HomeViewController.showPhotoBrowser(note:)), name: Notification.Name(PhotoBrowserShouldShowNotification), object: nil)
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 }
 
 //MARK:- UI设定

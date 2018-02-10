@@ -38,6 +38,7 @@
 		18BBBD50202ACED300E3CCA4 /* ComposeTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BBBD4F202ACED300E3CCA4 /* ComposeTitleView.swift */; };
 		18BBBD52202AD26300E3CCA4 /* ComposeTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BBBD51202AD26300E3CCA4 /* ComposeTextView.swift */; };
 		18C09555202F227600176550 /* PhotoBrowserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C09554202F227600176550 /* PhotoBrowserController.swift */; };
+		18C09557202F337500176550 /* PhotoBrowserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C09556202F337500176550 /* PhotoBrowserCell.swift */; };
 		18C47BA4202B02F7008D16E2 /* PicPickerCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C47BA3202B02F7008D16E2 /* PicPickerCollectionView.swift */; };
 		18C47BA7202B05EF008D16E2 /* PicPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C47BA5202B05EF008D16E2 /* PicPickerCell.swift */; };
 		18C47BA8202B05EF008D16E2 /* PicPickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18C47BA6202B05EF008D16E2 /* PicPickerCell.xib */; };
@@ -113,6 +114,7 @@
 		18BBBD4F202ACED300E3CCA4 /* ComposeTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeTitleView.swift; sourceTree = "<group>"; };
 		18BBBD51202AD26300E3CCA4 /* ComposeTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeTextView.swift; sourceTree = "<group>"; };
 		18C09554202F227600176550 /* PhotoBrowserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoBrowserController.swift; sourceTree = "<group>"; };
+		18C09556202F337500176550 /* PhotoBrowserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoBrowserCell.swift; sourceTree = "<group>"; };
 		18C47BA3202B02F7008D16E2 /* PicPickerCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PicPickerCollectionView.swift; sourceTree = "<group>"; };
 		18C47BA5202B05EF008D16E2 /* PicPickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PicPickerCell.swift; sourceTree = "<group>"; };
 		18C47BA6202B05EF008D16E2 /* PicPickerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PicPickerCell.xib; sourceTree = "<group>"; };
@@ -249,6 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				18C09554202F227600176550 /* PhotoBrowserController.swift */,
+				18C09556202F337500176550 /* PhotoBrowserCell.swift */,
 			);
 			path = PhotoBrowser;
 			sourceTree = "<group>";
@@ -637,6 +640,7 @@
 				184DAB35201F035A002E9DC8 /* UIBarButtonItem-Extension.swift in Sources */,
 				18FF771E201B681800055AA8 /* MainViewController.swift in Sources */,
 				187A500E2023FB7C001D5145 /* UserAccountTool.swift in Sources */,
+				18C09557202F337500176550 /* PhotoBrowserCell.swift in Sources */,
 				18E7764E202D69EF004BE4E2 /* UITextView-Emoticon.swift in Sources */,
 				1872658C202C309300C48128 /* EmoticonManager.swift in Sources */,
 				18BBBD4D202ACD4A00E3CCA4 /* ComposeViewController.swift in Sources */,
