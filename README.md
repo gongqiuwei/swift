@@ -1311,4 +1311,5 @@ Environment Variables 添加一栏name：OS_ACTIVITY_MODE  Value:disable
 			
 	- photoBrowser 
 		- 使用通知，通知HomeViewController弹出photoBrowser
-		- 基本布局
+		- photoBrowser基本布局
+		- 自定义photoBrowserCell
