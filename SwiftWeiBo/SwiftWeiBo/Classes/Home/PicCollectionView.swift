@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class PicCollectionView: UICollectionView {
     
@@ -41,12 +42,63 @@ extension PicCollectionView: UICollectionViewDataSource, UICollectionViewDelegat
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         // 发送通知
-        NotificationCenter.default.post(name: Notification.Name(PhotoBrowserShouldShowNotification), object: nil, userInfo: [PhotoBrowserIndexKey: indexPath, PhotoBrowserUrlKey: picUrls])
+        NotificationCenter.default.post(name: Notification.Name(PhotoBrowserShouldShowNotification), object: self, userInfo: [PhotoBrowserIndexKey: indexPath, PhotoBrowserUrlKey: picUrls])
+    }
+}
+
+//MARK:- PhotoBrowserAnimatorPresentDelegate
+extension PicCollectionView: PhotoBrowserAnimatorPresentDelegate {
+    // 开始的frame
+    func startRectForPresent(indexPath: IndexPath) -> CGRect {
+        // 根据indexPath取出cell
+        let cell = cellForItem(at: indexPath)!
+        
+        // cell的frame是相对于它的父控件，也就是collectionview的位置，需要转换到相对于keywindow
+        let rect = self.convert(cell.frame, to: UIApplication.shared.keyWindow)
+        
+        return rect
+    }
+    // 结束的frame
+    func endRectForPresent(indexPath: IndexPath) -> CGRect {
+        // 取出image
+        let url = picUrls[indexPath.item]
+        let urlStr = url.absoluteString
+        guard let image = SDWebImageManager.shared().imageCache?.imageFromDiskCache(forKey: urlStr) else {
+            return CGRect.zero
+        }
+        
+        // 根据image确定尺寸,类似PhotoBrowserCell中的计算
+        let x: CGFloat = 0.0
+        let width = UIScreen.main.bounds.width
+        let height = image.size.height * width / image.size.width
+        var y: CGFloat = 0.0
+        if height > UIScreen.main.bounds.height {
+            y = 0.0
+        } else {
+            y = (UIScreen.main.bounds.height - height) * 0.5
+        }
+        
+        return CGRect(x: x, y: y, width: width, height: height)
+    }
+    
+    func imageViewForPresent(indexPath: IndexPath) -> UIImageView {
+        // 取出image
+        let url = picUrls[indexPath.item]
+        let urlStr = url.absoluteString
+        let image = SDWebImageManager.shared().imageCache?.imageFromDiskCache(forKey: urlStr)
+        
+        // 创建imageView
+        let imageView = UIImageView(image: image)
+        // Mode属性和PicCollectionCell中的一致
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        
+        return imageView
     }
 }
 
 
-
+//MARK:-PicCollectionCell
 class PicCollectionCell: UICollectionViewCell {
     
     var imageUrl:URL? {

@@ -124,6 +124,7 @@ extension HomeViewController {
         }
         let picUrls = userinfo[PhotoBrowserUrlKey] as! [URL]
         let indexPath = userinfo[PhotoBrowserIndexKey] as! IndexPath
+        let object = note.object as? PicCollectionView
         
         // 弹出photoBrowser控制器
         // let browser = PhotoBrowserController(picUrls: picUrls, indexPath: indexPath)
@@ -134,6 +135,8 @@ extension HomeViewController {
         
         browser.modalPresentationStyle = .custom
         browser.transitioningDelegate = photoBrowserAnimator
+        photoBrowserAnimator.presentDelegate = object
+        photoBrowserAnimator.indexPath = indexPath
         
         present(browser, animated: true, completion: nil)
     }
