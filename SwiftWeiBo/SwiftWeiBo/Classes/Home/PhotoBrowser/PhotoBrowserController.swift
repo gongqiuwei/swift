@@ -138,3 +138,25 @@ extension PhotoBrowserController: UICollectionViewDataSource {
     }
 }
 
+//MARK:- PhotoBrowserAnimatorDismissDelegate
+extension PhotoBrowserController: PhotoBrowserAnimatorDismissDelegate {
+    func indexPathForDismiss() -> IndexPath {
+        let cell = collectionView.visibleCells.first!
+        return collectionView.indexPath(for: cell)!
+    }
+    
+    func imageViewForDismiss() -> UIImageView {
+        let cell = collectionView.visibleCells.first as! PhotoBrowserCell
+        
+        let imageView = UIImageView()
+        imageView.image = cell.imageView.image
+        imageView.frame = cell.imageView.frame
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        
+        return imageView
+    }
+}
+
+
+

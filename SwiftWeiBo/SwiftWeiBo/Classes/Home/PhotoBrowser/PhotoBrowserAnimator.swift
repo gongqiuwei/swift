@@ -9,10 +9,14 @@
 import UIKit
 
 // 面向协议开发，先根据协议确定需要的东西，然后让某个对象来提供
-protocol PhotoBrowserAnimatorPresentDelegate: NSObjectProtocol {
+protocol PhotoBrowserAnimatorPresentDelegate {
     func startRectForPresent(indexPath: IndexPath) -> CGRect
     func endRectForPresent(indexPath: IndexPath) -> CGRect
     func imageViewForPresent(indexPath: IndexPath) -> UIImageView
+}
+protocol PhotoBrowserAnimatorDismissDelegate {
+    func imageViewForDismiss() -> UIImageView
+    func indexPathForDismiss() -> IndexPath
 }
 
 class PhotoBrowserAnimator: NSObject {
@@ -20,6 +24,7 @@ class PhotoBrowserAnimator: NSObject {
     
     var indexPath: IndexPath?
     var presentDelegate: PhotoBrowserAnimatorPresentDelegate?
+    var dismissDelegate: PhotoBrowserAnimatorDismissDelegate?
 }
 
 
@@ -66,26 +71,36 @@ extension PhotoBrowserAnimator: UIViewControllerAnimatedTransitioning {
         
         // 动画
         presentView?.alpha = 0.0
+        transitionContext.containerView.backgroundColor = UIColor.black
         UIView.animate(withDuration: transitionDuration(using: transitionContext), animations: {
             imageView.frame = presentDelegate.endRectForPresent(indexPath: indexPath)
         }) { (_) in
             imageView.removeFromSuperview()
             presentView?.alpha = 1.0
+            transitionContext.containerView.backgroundColor = UIColor.clear
             transitionContext.completeTransition(true)
         }
     }
     
     private func animationForDismiss(using transitionContext: UIViewControllerContextTransitioning) {
+        guard let dismissDelegate = dismissDelegate, let presentDelegate = presentDelegate else {
+            return
+        }
+        
         // 获取dismissView
         let dismissView = transitionContext.view(forKey: .from)
+        // 先移除dismissView
+        dismissView?.removeFromSuperview()
+        
+        // 获取动画的imageView
+        let imageView = dismissDelegate.imageViewForDismiss()
+        transitionContext.containerView.addSubview(imageView)
         
         // 动画
         UIView.animate(withDuration: transitionDuration(using: transitionContext), animations: { 
-            dismissView?.alpha = 0.0
+            imageView.frame = presentDelegate.startRectForPresent(indexPath: dismissDelegate.indexPathForDismiss())
         }) { (_) in
-            // 移除dismissView
-            dismissView?.removeFromSuperview()
-            
+            imageView.removeFromSuperview()
             transitionContext.completeTransition(true)
         }
     }

@@ -137,6 +137,7 @@ extension HomeViewController {
         browser.transitioningDelegate = photoBrowserAnimator
         photoBrowserAnimator.presentDelegate = object
         photoBrowserAnimator.indexPath = indexPath
+        photoBrowserAnimator.dismissDelegate = browser
         
         present(browser, animated: true, completion: nil)
     }
