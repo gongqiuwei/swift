@@ -35,5 +35,7 @@
 	</array>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>访问相册获取照片</string>
+	<key>NSCameraUsageDescription</key>
+	<string>访问相机拍摄照片</string>
 </dict>
 </plist>

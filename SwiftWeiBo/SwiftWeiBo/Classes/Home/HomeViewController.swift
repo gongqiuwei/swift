@@ -125,7 +125,15 @@ extension HomeViewController {
         let indexPath = userinfo[PhotoBrowserIndexKey] as! IndexPath
         
         // 弹出photoBrowser控制器
+        // let browser = PhotoBrowserController(picUrls: picUrls, indexPath: indexPath)
+        // present(browser, animated: true, completion: nil)
+        
+        // 自定义转场
         let browser = PhotoBrowserController(picUrls: picUrls, indexPath: indexPath)
+        
+//        browser.modalPresentationStyle = .custom
+//        browser.transitioningDelegate = 
+        
         present(browser, animated: true, completion: nil)
     }
 }

@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import SVProgressHUD
 
 private let PhotoBrowserCellId = "PhotoBrowserCellId"
 
@@ -62,11 +63,11 @@ class PhotoBrowserController: UIViewController {
         super.viewDidLoad()
 
         setupUI()
+        
+        // collectionview滚动的相应位置
+        collectionView.scrollToItem(at: indexPath, at: .left, animated: false)
     }
 
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        dismiss(animated: true, completion: nil)
-    }
 }
 
 //MARK:- UI布局
@@ -86,6 +87,12 @@ extension PhotoBrowserController {
             make.trailing.equalTo(-20)
             make.size.bottom.equalTo(closeBtn)
         }
+        
+        // 为了cell之间有分割效果，重新设置
+        // 原理，page效果是根据collectionview的width来的，让collectionview的width增加，cell的宽度增加，然后cell的内容宽度减少，这样就由间隔了
+        collectionView.frame.size.width += 20
+        let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        layout.itemSize.width = collectionView.frame.size.width
     }
 }
 
@@ -97,7 +104,21 @@ extension PhotoBrowserController {
     }
     
     @objc fileprivate func saveBtnClicked() {
-        print("saveBtnClicked")
+        let cell = collectionView.visibleCells.first as! PhotoBrowserCell
+        guard let image = cell.imageView.image else {
+            return
+        }
+        
+        //  - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo;
+        UIImageWriteToSavedPhotosAlbum(image, self, #selector(PhotoBrowserController.image(_:didFinishSavingWithError:contextInfo:)), nil)
+    }
+    
+    @objc fileprivate func image(_ image:UIImage, didFinishSavingWithError error:Error?, contextInfo: AnyObject) {
+        if error != nil {
+            SVProgressHUD.showInfo(withStatus: "保存失败")
+        } else {
+            SVProgressHUD.showInfo(withStatus: "保存成功")
+        }
     }
 }
 

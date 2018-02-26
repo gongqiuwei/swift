@@ -79,9 +79,9 @@ class StatusViewModel: NSObject {
                 }
                 
                 //thumbnail_pic是不清晰的图片，将urlStr中的/thumbnail/替换为/bmiddle/就是清晰的，sina的锅
-                let tempstr = urlStr.replacingOccurrences(of: "/thumbnail/", with: "/bmiddle/")
-                // 保证传入的urlstring能够生成一个url，因为
-                let url = URL(string: tempstr)!
+//                let tempstr = urlStr.replacingOccurrences(of: "/thumbnail/", with: "/bmiddle/")
+                // 保证传入的urlstring能够生成一个url，
+                let url = URL(string: urlStr)!
                 picUrls.append(url)
             }
         }
