@@ -34,6 +34,7 @@
 		18726590202C30FE00C48128 /* Emoticon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1872658F202C30FE00C48128 /* Emoticon.swift */; };
 		187A500E2023FB7C001D5145 /* UserAccountTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187A500D2023FB7C001D5145 /* UserAccountTool.swift */; };
 		188C84A12043B33000646585 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188C84A02043B33000646585 /* ProgressView.swift */; };
+		188C84A32043F36700646585 /* PhotoBrowserAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188C84A22043F36700646585 /* PhotoBrowserAnimator.swift */; };
 		18BBBD4D202ACD4A00E3CCA4 /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BBBD4B202ACD4A00E3CCA4 /* ComposeViewController.swift */; };
 		18BBBD4E202ACD4A00E3CCA4 /* ComposeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18BBBD4C202ACD4A00E3CCA4 /* ComposeViewController.xib */; };
 		18BBBD50202ACED300E3CCA4 /* ComposeTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BBBD4F202ACED300E3CCA4 /* ComposeTitleView.swift */; };
@@ -111,6 +112,7 @@
 		1872658F202C30FE00C48128 /* Emoticon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Emoticon.swift; sourceTree = "<group>"; };
 		187A500D2023FB7C001D5145 /* UserAccountTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAccountTool.swift; sourceTree = "<group>"; };
 		188C84A02043B33000646585 /* ProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
+		188C84A22043F36700646585 /* PhotoBrowserAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoBrowserAnimator.swift; sourceTree = "<group>"; };
 		18BBBD4B202ACD4A00E3CCA4 /* ComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeViewController.swift; sourceTree = "<group>"; };
 		18BBBD4C202ACD4A00E3CCA4 /* ComposeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ComposeViewController.xib; sourceTree = "<group>"; };
 		18BBBD4F202ACED300E3CCA4 /* ComposeTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeTitleView.swift; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 				18C09554202F227600176550 /* PhotoBrowserController.swift */,
 				18C09556202F337500176550 /* PhotoBrowserCell.swift */,
 				188C84A02043B33000646585 /* ProgressView.swift */,
+				188C84A22043F36700646585 /* PhotoBrowserAnimator.swift */,
 			);
 			path = PhotoBrowser;
 			sourceTree = "<group>";
@@ -658,6 +661,7 @@
 				18726588202C1D8500C48128 /* EmoticonViewController.swift in Sources */,
 				18E113E6201AB9FA00D4FC3F /* AppDelegate.swift in Sources */,
 				186E07702027EA3900EDAA22 /* StatusViewModel.swift in Sources */,
+				188C84A32043F36700646585 /* PhotoBrowserAnimator.swift in Sources */,
 				186E07722028013300EDAA22 /* HomeViewCell.swift in Sources */,
 				184DAB3F20205635002E9DC8 /* PopoverAnimator.swift in Sources */,
 				186E07742028885C00EDAA22 /* PicCollectionView.swift in Sources */,

@@ -36,6 +36,7 @@ class HomeViewController: BaseViewController {
     
 //    fileprivate lazy var statuses:[Status] = [Status]()
     fileprivate lazy var viewModels:[StatusViewModel] = [StatusViewModel]()
+    fileprivate lazy var photoBrowserAnimator: PhotoBrowserAnimator = PhotoBrowserAnimator()
     
     //MARK: - 系统周期函数
     override func viewDidLoad() {
@@ -131,8 +132,8 @@ extension HomeViewController {
         // 自定义转场
         let browser = PhotoBrowserController(picUrls: picUrls, indexPath: indexPath)
         
-//        browser.modalPresentationStyle = .custom
-//        browser.transitioningDelegate = 
+        browser.modalPresentationStyle = .custom
+        browser.transitioningDelegate = photoBrowserAnimator
         
         present(browser, animated: true, completion: nil)
     }

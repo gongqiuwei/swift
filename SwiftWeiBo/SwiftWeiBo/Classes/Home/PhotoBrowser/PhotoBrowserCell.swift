@@ -100,7 +100,7 @@ extension PhotoBrowserCell {
     fileprivate func setContentWithImage(image: UIImage) {
         // 2.计算imageView的尺寸
         let x: CGFloat = 0.0
-        let width = contentView.bounds.width
+        let width = UIScreen.main.bounds.width
         let height = image.size.height * width / image.size.width
         var y: CGFloat = 0.0
         if height > contentView.bounds.height {
